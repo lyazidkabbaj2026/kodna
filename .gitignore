@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+.cache/
+screenshots/
+# Raw source videos are large: only the web-encoded copies in encoded/ are committed.
+media/**/*.mp4
+media/**/*.mov
+media/**/*.m4v

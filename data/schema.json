@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://kodna.ma/schemas/proposal.json",
+  "title": "Kodna proposal (one client)",
+  "description": "All client-facing copy for one proposal. Media paths are relative to media/<slug>/.",
+  "type": "object",
+  "required": ["client", "date", "disclaimer", "finalAdds", "concepts", "terms", "cta"],
+  "properties": {
+    "placeholder": {
+      "type": "boolean",
+      "description": "true = demo content. The page shows a 'DÉMO' ribbon and the build warns. Remove before sending."
+    },
+    "client": {
+      "type": "object",
+      "required": ["slug", "name", "colors"],
+      "properties": {
+        "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "instagram": { "type": ["string", "null"] },
+        "whatsapp": { "type": ["string", "null"] },
+        "colors": {
+          "type": "object",
+          "required": ["primary"],
+          "properties": {
+            "primary": { "$ref": "#/definitions/color" },
+            "secondary": { "$ref": "#/definitions/color" },
+            "accent": { "$ref": "#/definitions/color" }
+          }
+        },
+        "logo": { "type": ["string", "null"], "description": "Path relative to media/<slug>/ (svg, png, jpg, webp)." },
+        "logoNote": { "type": ["string", "null"] }
+      }
+    },
+    "date": { "type": "string", "description": "ISO date (2026-10-20) is formatted in French; any other string is shown as is." },
+    "language": { "type": "string" },
+    "voiceoverLanguage": { "type": "string" },
+    "disclaimer": { "type": "string", "minLength": 1 },
+    "finalAdds": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "concepts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["letter", "title", "idea", "video", "shots"],
+        "properties": {
+          "letter": { "type": "string", "pattern": "^[A-Z]$" },
+          "title": { "type": "string" },
+          "idea": { "type": "string" },
+          "why": { "type": "array", "items": { "type": "string" } },
+          "durationSec": { "type": "number", "exclusiveMinimum": 0 },
+          "video": { "type": "string", "description": "Source file name, e.g. concept-a.mp4 (the encoded copy in encoded/<slug>/ is what ships)." },
+          "poster": { "type": ["string", "null"] },
+          "shots": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["image", "description"],
+              "properties": {
+                "id": { "type": ["string", "number"] },
+                "image": { "type": "string" },
+                "start": { "$ref": "#/definitions/time" },
+                "end": { "$ref": "#/definitions/time" },
+                "voiceover": { "type": ["string", "null"] },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "terms": {
+      "type": "object",
+      "required": ["price", "deposit", "onDelivery", "deliveryDays"],
+      "properties": {
+        "currency": { "type": "string" },
+        "price": { "type": "number" },
+        "deposit": { "type": "number" },
+        "onDelivery": { "type": "number" },
+        "deliveryDays": { "type": "number" },
+        "deliveryStartsAfter": { "type": "string" },
+        "revisionsIncluded": { "type": "number" },
+        "format": { "type": "string" },
+        "voiceover": { "type": "string" },
+        "extraLanguage": {
+          "type": ["object", "null"],
+          "properties": {
+            "language": { "type": "string" },
+            "price": { "type": "number" }
+          }
+        }
+      }
+    },
+    "gift": {
+      "type": ["object", "null"],
+      "properties": {
+        "title": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "object", "required": ["path"], "properties": { "path": { "type": "string" } } }
+            ]
+          }
+        },
+        "note": { "type": "string" }
+      }
+    },
+    "cta": {
+      "type": "object",
+      "required": ["instagramDm"],
+      "properties": {
+        "text": { "type": "string" },
+        "instagramDm": { "type": "string", "pattern": "^https://" },
+        "confirmHandle": { "description": "Truthy = the handle is not confirmed yet; the build prints a warning." }
+      }
+    }
+  },
+  "definitions": {
+    "color": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+    "time": {
+      "description": "Seconds (3.5) or a timecode string (\"0:03\", \"00:03.5\").",
+      "type": ["number", "string"]
+    }
+  }
+}

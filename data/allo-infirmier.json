@@ -1,0 +1,157 @@
+{
+  "client": {
+    "slug": "allo-infirmier",
+    "name": "Allo Infirmier",
+    "instagram": null,
+    "whatsapp": null,
+    "colors": {
+      "primary": "#1E7FC2",
+      "secondary": "#0F3D5E",
+      "accent": "#3BB39A"
+    },
+    "logo": "logo/logo.svg",
+    "logoNote": null
+  },
+  "placeholder": true,
+  "date": "2026-10-20",
+  "language": "fr",
+  "voiceoverLanguage": "Darija",
+  "disclaimer": "Ces vidéos sont un aperçu du concept, pas la vidéo finale.",
+  "finalAdds": [
+    "Tournage et images de qualité finale",
+    "Voix off professionnelle en Darija",
+    "Musique sous licence",
+    "Montage, rythme et étalonnage soignés",
+    "Sous-titres et logo animé"
+  ],
+  "terms": {
+    "currency": "Dh",
+    "price": 800,
+    "deposit": 400,
+    "onDelivery": 400,
+    "deliveryDays": 2,
+    "deliveryStartsAfter": "l'acompte et le choix du concept",
+    "revisionsIncluded": 1,
+    "format": "Vidéo verticale 9:16 (Reels, Stories, TikTok)",
+    "voiceover": "Voix off en Darija incluse",
+    "extraLanguage": {
+      "language": "Langue supplémentaire",
+      "price": 200
+    }
+  },
+  "cta": {
+    "text": "Répondez simplement « A » ou « B » dans notre conversation Instagram. On lance dès réception de l'acompte.",
+    "instagramDm": "https://ig.me/m/kodna.ma",
+    "confirmHandle": true
+  },
+  "concepts": [
+    {
+      "letter": "A",
+      "title": "Titre du concept A (démo)",
+      "idea": "Texte de démonstration : l'idée du concept A en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
+      "why": [
+        "Premier argument du concept A (démo).",
+        "Deuxième argument du concept A (démo)."
+      ],
+      "durationSec": 20,
+      "video": "concept-a.mp4",
+      "poster": null,
+      "shots": [
+        {
+          "id": 1,
+          "image": "shots/a1.jpg",
+          "start": "0:00",
+          "end": "0:05",
+          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 1 du concept A : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 2,
+          "image": "shots/a2.jpg",
+          "start": "0:05",
+          "end": "0:10",
+          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 2 du concept A : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 3,
+          "image": "shots/a3.jpg",
+          "start": "0:10",
+          "end": "0:15",
+          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 3 du concept A : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 4,
+          "image": "shots/a4.jpg",
+          "start": "0:15",
+          "end": "0:20",
+          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 4 du concept A : description de démonstration de ce que l'on voit à l'écran."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Titre du concept B (démo)",
+      "idea": "Texte de démonstration : l'idée du concept B en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
+      "why": [
+        "Premier argument du concept B (démo).",
+        "Deuxième argument du concept B (démo)."
+      ],
+      "durationSec": 20,
+      "video": "concept-b.mp4",
+      "poster": null,
+      "shots": [
+        {
+          "id": 1,
+          "image": "shots/b1.jpg",
+          "start": "0:00",
+          "end": "0:05",
+          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 1 du concept B : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 2,
+          "image": "shots/b2.jpg",
+          "start": "0:05",
+          "end": "0:10",
+          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 2 du concept B : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 3,
+          "image": "shots/b3.jpg",
+          "start": "0:10",
+          "end": "0:15",
+          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 3 du concept B : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 4,
+          "image": "shots/b4.jpg",
+          "start": "0:15",
+          "end": "0:20",
+          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 4 du concept B : description de démonstration de ce que l'on voit à l'écran."
+        },
+        {
+          "id": 5,
+          "image": "shots/b5.jpg",
+          "start": "0:20",
+          "end": "0:25",
+          "voiceover": "Ligne de voix off 5 (démo, Darija dans le vrai fichier)",
+          "description": "Plan 5 du concept B : description de démonstration de ce que l'on voit à l'écran."
+        }
+      ]
+    }
+  ],
+  "gift": {
+    "title": "Votre logo en HD, offert",
+    "files": [
+      "logo/logo.svg",
+      "logo/logo.png"
+    ],
+    "note": "Nous avons redessiné votre logo en haute définition. Il vous sera remis avec la vidéo."
+  }
+}

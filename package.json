@@ -1,0 +1,33 @@
+{
+  "name": "kodna-proposals",
+  "version": "1.0.0",
+  "description": "Private, swipeable video-ad proposals for Kodna clients (one JSON per client).",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "encode": "node scripts/encode.mjs",
+    "check": "node scripts/check.mjs",
+    "typecheck": "tsc -p .",
+    "preview": "node scripts/preview.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lyazidkabbaj2026/kodna.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lyazidkabbaj2026/kodna/issues"
+  },
+  "homepage": "https://github.com/lyazidkabbaj2026/kodna#readme",
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "esbuild": "^0.25.10",
+    "playwright-core": "^1.55.1",
+    "sharp": "^0.34.4",
+    "typescript": "^5.9.3"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  }
+}
