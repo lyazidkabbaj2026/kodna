@@ -2,8 +2,6 @@
 -- Visitors can only INSERT events (anon key, row-level security). Nobody can read them except
 -- through kodna_stats(key), which checks the secret stats key stored in private.settings.
 
-create extension if not exists pgcrypto;
-
 create table if not exists public.proposal_events (
   id         bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
@@ -34,7 +32,7 @@ create schema if not exists private;
 revoke all on schema private from anon, authenticated;
 create table if not exists private.settings (key text primary key, value text not null);
 insert into private.settings (key, value)
-  values ('stats_key', encode(gen_random_bytes(18), 'hex'))
+  values ('stats_key', replace(gen_random_uuid()::text, '-', ''))
   on conflict (key) do nothing;
 
 create or replace function public.kodna_stats(p_key text, p_days int default 90)

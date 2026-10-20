@@ -1,10 +1,13 @@
 // Returns raw view events for the stats dashboard (/stats). The secret key travels in a header
 // and is checked inside the database (kodna_stats), so this function holds no secret itself.
 
+import { SUPABASE_URL, SUPABASE_KEY } from './_config.js';
+
 export default async function handler(req, res) {
   res.setHeader('cache-control', 'no-store');
   res.setHeader('x-robots-tag', 'noindex, nofollow');
-  const { SUPABASE_URL: url, SUPABASE_KEY: key } = process.env;
+  const url = SUPABASE_URL;
+  const key = SUPABASE_KEY;
   if (!url || !key) return res.status(503).json({ error: 'not_configured' });
   const statsKey = req.headers['x-stats-key'];
   if (!statsKey || typeof statsKey !== 'string' || statsKey.length > 100) return res.status(401).json({ error: 'key' });

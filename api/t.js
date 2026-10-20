@@ -1,6 +1,7 @@
 // Receives view-tracking beacons from the proposal pages and stores them in Supabase.
-// Env: SUPABASE_URL, SUPABASE_KEY (anon/publishable key; the table only allows inserts).
-// Without them it accepts and drops events, so the pages work either way.
+// Database settings in ./_config.js (the table only allows inserts).
+
+import { SUPABASE_URL, SUPABASE_KEY } from './_config.js';
 
 const TYPES = new Set(['open', 'view', 'play', 'watched', 'pick', 'lang', 'hide', 'show', 'leave']);
 const str = (v, max) => (typeof v === 'string' ? v.slice(0, max) : null);
@@ -19,7 +20,8 @@ export default async function handler(req, res) {
     raw += chunk;
     if (raw.length > 32_000) return res.status(413).end();
   }
-  const { SUPABASE_URL: url, SUPABASE_KEY: key } = process.env;
+  const url = SUPABASE_URL;
+  const key = SUPABASE_KEY;
   if (!url || !key) return res.status(204).end();
 
   let body;
