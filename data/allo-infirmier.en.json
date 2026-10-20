@@ -1,0 +1,87 @@
+{
+  "disclaimer": "Concept preview, not the final video.",
+  "finalAdds": [
+    "Animated visuals",
+    "Music made for the video",
+    "Better sound effects",
+    "Final voiceover",
+    "Subtitles",
+    "Motion design and text"
+  ],
+  "concepts": [
+    {
+      "idea": "We contrast the hassle (the taxi, the waiting room, the lost morning) with the solution: the clinic comes to you. Then we show the services and 24/7 coverage across Marrakech.",
+      "why": [
+        "A clear message in under 10 seconds",
+        "Shows the full list of services"
+      ],
+      "shots": [
+        {
+          "description": "Syringe, bandage, blood-test tube: each item is circled as the voice names it."
+        },
+        {
+          "description": "The taxi stuck in traffic, in the blazing sun."
+        },
+        {
+          "description": "A packed waiting room: ticket No. 47 in hand, the screen shows No. 12."
+        },
+        {
+          "description": "The nurse arrives at the door with her kit. The Allo Infirmier logo appears."
+        },
+        {
+          "description": "Blood pressure check at home. The services appear one by one, in time with the voice."
+        },
+        {
+          "description": "Map of Marrakech: dots light up everywhere. “24/7” badge."
+        },
+        {
+          "description": "End card: logo, “Lil w nhar · Marrakech kamla”, WhatsApp button, 1,500+ home visits, Instagram."
+        }
+      ]
+    },
+    {
+      "idea": "A short story: a son stuck in a meeting, his mother due for her IV drip today. A WhatsApp voice note, a nurse at her home, and Mama calling back to say all is well.",
+      "why": [
+        "Plays on trust and emotion",
+        "Speaks directly to children caring for their parents"
+      ],
+      "shots": [
+        {
+          "description": "10 a.m., a meeting. A notification pops up: “Mama — sérum lyouma”."
+        },
+        {
+          "description": "Split screen: him at the office, Mama at home."
+        },
+        {
+          "description": "In the hallway, he sends a WhatsApp voice note to Allo Infirmier."
+        },
+        {
+          "description": "The nurse rings Mama’s doorbell."
+        },
+        {
+          "description": "11:30 a.m.: his phone rings on the table, an incoming call from Mama."
+        },
+        {
+          "description": "At Mama’s: the nurse takes care of the IV drip, Mama is settled in her armchair."
+        },
+        {
+          "description": "End card: logo, “Soins f ddar · lil w nhar”, WhatsApp button, 1,500+ home visits, Instagram."
+        }
+      ]
+    }
+  ],
+  "terms": {
+    "deliveryStartsAfter": "the deposit and your choice of concept",
+    "format": "Vertical 9:16 HD video (MP4) for Instagram, TikTok and WhatsApp",
+    "voiceover": "Darija, included",
+    "extraLanguage": {
+      "language": "French"
+    }
+  },
+  "gift": {
+    "title": "Your logo in HD, free"
+  },
+  "cta": {
+    "text": "Reply A or B in our Instagram conversation, and we get started."
+  }
+}

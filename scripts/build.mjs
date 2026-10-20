@@ -12,7 +12,11 @@ import { makeOgImage } from './lib/og.mjs';
 const DIST = path.join(ROOT, 'dist');
 const CACHE = path.join(ROOT, '.cache');
 const SITE_URL = (process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')).replace(/\/$/, '');
-const ui = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/ui.fr.json'), 'utf8'));
+const uiFor = (lang) => {
+  const file = path.join(ROOT, `src/ui.${lang}.json`);
+  if (!fs.existsSync(file)) throw new Error(`No UI strings for language "${lang}" (src/ui.${lang}.json)`);
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+};
 
 let clients;
 try {
@@ -85,10 +89,10 @@ const js = (
 
 const markSvg = fs.readFileSync(path.join(ROOT, 'brand/kodna-mark.svg'), 'utf8');
 const favicon = emit(Buffer.from(markSvg.replace('currentColor', '#0a1428')), 'svg');
-const shared = { css, js, ui, markSvg, favicon, preloadFont: fontUrls['inter-latin-wght-normal.woff2'] };
+const shared = { css, js, markSvg, favicon, preloadFont: fontUrls['inter-latin-wght-normal.woff2'] };
 
 const report = [];
-for (const { data } of clients) {
+for (const { data, langs: byLang } of clients) {
   const slug = data.client.slug;
   const media = (rel) => mediaPath(slug, rel);
   const assets = { logo: null, concepts: [], gift: [] };
@@ -102,7 +106,7 @@ for (const { data } of clients) {
     assets.concepts.push({
       video: emit(videoBuf, 'mp4', 'v'),
       videoBytes: videoBuf.length,
-      poster: await image(posterFile, [480, 720]),
+      poster: await image(posterFile, [240, 480, 720]),
       shots: await Promise.all(c.shots.map((s) => image(media(s.image), [320, 540]))),
     });
   }
@@ -110,26 +114,33 @@ for (const { data } of clients) {
     const rel = typeof f === 'string' ? f : f.path;
     if (/\.(svg|png|jpe?g|webp)$/i.test(rel)) assets.gift.push(await image(media(rel), [480, 960]));
   }
-  const og = emit(await makeOgImage({ data, ui, markSvg, logoFile: data.client.logo && media(data.client.logo), posterFiles: assets.concepts.map((_, i) => {
-    const c = data.concepts[i];
-    return c.poster ? media(c.poster) : path.join(ROOT, 'encoded', slug, `${path.basename(c.video, path.extname(c.video))}.poster.webp`);
-  }) }), 'jpg');
+  const posterFiles = data.concepts.map((c) =>
+    c.poster ? media(c.poster) : path.join(ROOT, 'encoded', slug, `${path.basename(c.video, path.extname(c.video))}.poster.webp`),
+  );
 
+  // Base language at /p/<slug>-<token> (with the language picker), others at .../<lang>.
   const route = `/p/${slug}-${tokens[slug]}`;
-  const html = renderProposal({ data, assets, shared, og: SITE_URL + og, url: SITE_URL + route });
-  fs.mkdirSync(path.join(DIST, route), { recursive: true });
-  fs.writeFileSync(path.join(DIST, route, 'index.html'), html);
-  report.push({ slug, route, html: Buffer.byteLength(html), videos: assets.concepts.map((a) => a.videoBytes), placeholder: !!data.placeholder, confirm: !!data.cta.confirmHandle });
+  const codes = Object.keys(byLang);
+  const uis = codes.map(uiFor);
+  const langs = codes.map((code, i) => ({ code, short: uis[i].langShort, name: uis[i].langName, href: i ? `${route}/${code}` : route }));
+  for (const [i, code] of codes.entries()) {
+    const ld = byLang[code];
+    const og = emit(await makeOgImage({ data: ld, ui: uis[i], markSvg, logoFile: data.client.logo && media(data.client.logo), posterFiles }), 'jpg');
+    const html = renderProposal({ data: ld, assets, shared, ui: uis[i], lang: code, langs, uis, og: SITE_URL + og, url: SITE_URL + langs[i].href });
+    fs.mkdirSync(path.join(DIST, langs[i].href), { recursive: true });
+    fs.writeFileSync(path.join(DIST, langs[i].href, 'index.html'), html);
+  }
+  report.push({ slug, route, langs: codes, videos: assets.concepts.map((a) => a.videoBytes), placeholder: !!data.placeholder, confirm: !!data.cta.confirmHandle });
 }
 
-fs.writeFileSync(path.join(DIST, '404.html'), render404(shared));
+fs.writeFileSync(path.join(DIST, '404.html'), render404(shared, uiFor('fr')));
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 const jsGz = (await import('node:zlib')).gzipSync(js).length;
 console.log(`\nJS ${kb(js.length)} (${kb(jsGz)} gz) · CSS ${kb(css.length)} inlined\n`);
 for (const r of report) {
   console.log(`✓ ${SITE_URL || ''}${r.route}`);
-  console.log(`    html ${kb(r.html)} · videos ${r.videos.map((v) => `${(v / 1048576).toFixed(1)} MB`).join(' + ')}`);
+  console.log(`    ${r.langs.join(' + ')} · videos ${r.videos.map((v) => `${(v / 1048576).toFixed(1)} MB`).join(' + ')}`);
   if (r.placeholder) console.log('    ! placeholder: true (demo content, shows a DÉMO ribbon)');
   if (r.confirm) console.log('    ! cta.confirmHandle is set: confirm the Instagram handle before sending');
 }

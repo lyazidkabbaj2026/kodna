@@ -3,7 +3,7 @@ import { loadClients, DataError } from './lib/clients.mjs';
 
 try {
   const clients = loadClients();
-  for (const { data } of clients) console.log(`✓ ${data.client.slug}${data.placeholder ? '  (placeholder)' : ''}`);
+  for (const { data, langs } of clients) console.log(`✓ ${data.client.slug} [${Object.keys(langs).join(', ')}]${data.placeholder ? '  (placeholder)' : ''}`);
 } catch (e) {
   if (!(e instanceof DataError)) throw e;
   console.error(`✗ ${e.message}`);

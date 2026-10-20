@@ -9,11 +9,13 @@ const track = $('[data-track]')!;
 const pages = $$('.page', track);
 const segs = $$('.progress__seg');
 const countEl = $('[data-count]')!;
-const prevBtn = $<HTMLButtonElement>('[data-prev]')!;
-const nextBtn = $<HTMLButtonElement>('[data-next]')!;
+const prevBtn = $<HTMLButtonElement>('button[data-prev]')!;
+const nextBtn = $<HTMLButtonElement>('button[data-next]')!;
+const nextLabel = $('[data-next-label]')!;
 const toastEl = $('[data-toast]')!;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const n = pages.length;
+const root = document.documentElement;
 let current = 0;
 
 // ---------------------------------------------------------------- media deterrents
@@ -65,7 +67,9 @@ function go(i: number, animate = true) {
   deck.dataset.tone = pages[i].dataset.tone || 'light';
   deck.dataset.page = String(i + 1);
   prevBtn.disabled = i === 0;
-  nextBtn.disabled = i === n - 1;
+  const label = pages[i].dataset.dock || '';
+  nextBtn.hidden = !label;
+  if (label) nextLabel.textContent = label;
   hydrate(i);
   hydrate(i + 1);
   hydrate(i - 1);
@@ -78,8 +82,10 @@ function go(i: number, animate = true) {
 
 prevBtn.addEventListener('click', () => go(current - 1));
 nextBtn.addEventListener('click', () => go(current + 1));
+for (const b of $$('[data-go-next]')) b.addEventListener('click', () => go(current + 1));
 
 document.addEventListener('keydown', (ev) => {
+  if (!root.classList.contains('lang-set')) return; // language picker still open
   const t = ev.target as HTMLElement;
   if (t.closest('[data-seek]')) return;
   if (ev.key === 'ArrowRight' || ev.key === 'PageDown') go(current + 1);
@@ -300,6 +306,26 @@ for (const a of $$<HTMLAnchorElement>('[data-pick]')) {
         window.location.href = href;
       }, 1100);
     });
+  });
+}
+
+// ---------------------------------------------------------------- language
+
+// The base page opens on a FR / EN picker (hidden by the boot script once a choice is
+// remembered). Picking this page's language just closes it; the other one navigates.
+for (const a of $$<HTMLAnchorElement>('[data-setlang]')) {
+  a.addEventListener('click', (ev) => {
+    const lang = a.dataset.setlang || '';
+    try {
+      localStorage.setItem('kodna-lang', lang);
+    } catch {
+      /* private mode: the choice just isn't remembered */
+    }
+    if (lang === root.lang) {
+      ev.preventDefault();
+      root.classList.add('lang-set');
+      nextBtn.focus({ preventScroll: true });
+    }
   });
 }
 

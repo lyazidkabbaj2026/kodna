@@ -11,10 +11,22 @@ swipes through the proposal in Instagram's in-app browser, watches the concept p
 Static output (no server, no trackers), deployed on Vercel. JS ≈ 2 KB gzipped, CSS inlined, one HTML request
 before first paint. Media loads only for the current page and its neighbours.
 
+## Languages
+
+The link opens on a **Français / English** picker. Choosing French closes it; choosing English goes to
+`/p/<slug>-<token>/en`. The choice is remembered on that phone, and a FR/EN switch stays in the top bar.
+
+- UI strings: `src/ui.fr.json`, `src/ui.en.json`.
+- Client copy: `data/<slug>.json` is the base (French). `data/<slug>.en.json` holds only the translated
+  fields, with the same structure (arrays line up by index, e.g. `concepts[0].shots[2].description`).
+  Fields left out keep the base text, so Darija voiceover lines and concept titles stay as they are.
+  `npm run check` rejects keys that don't exist in the base file.
+- No translation file = no picker, French only.
+
 ## Pages
 
 Cover → Avant de regarder → for each concept: idea · video · plan par plan → Pour lancer → Choisir.
-Swipe left/right, tap the left/right edge, the ‹ › buttons, or the keyboard arrows. The shots strip
+Swipe left/right, tap the left/right edge, the bottom bar (back + "next: …" button), or the keyboard arrows. The shots strip
 scrolls on its own. To change page from there, swipe from the very edge of the screen or use the buttons.
 
 ## Add a client

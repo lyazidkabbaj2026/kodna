@@ -19,14 +19,54 @@ export function mediaPath(slug, rel) {
   return path.join(ROOT, 'media', slug, rel.startsWith(prefix) ? rel.slice(prefix.length) : rel);
 }
 
-/** Every data/<slug>.json, parsed and (by default) checked against the schema and media folder. */
+/**
+ * Every data/<slug>.json, parsed and (by default) checked against the schema and media folder.
+ * Optional translations live next to it as data/<slug>.<lang>.json: same structure, only the
+ * translated fields (arrays line up by index). `langs` maps each language to the merged data,
+ * base language first.
+ */
 export function loadClients({ validate = true } = {}) {
-  const files = fs.readdirSync(DATA).filter((f) => f.endsWith('.json') && !RESERVED.has(f) && !f.startsWith('_'));
-  return files.sort().map((file) => {
+  const all = fs.readdirSync(DATA).filter((f) => f.endsWith('.json') && !RESERVED.has(f) && !f.startsWith('_'));
+  const bases = all.filter((f) => /^[a-z0-9-]+\.json$/.test(f));
+  return bases.sort().map((file) => {
+    const slug = file.slice(0, -5);
     const data = JSON.parse(fs.readFileSync(path.join(DATA, file), 'utf8'));
     if (validate) check(file, data);
-    return { file, data };
+    const langs = { [data.language || 'fr']: data };
+    for (const tfile of all.filter((f) => f.startsWith(`${slug}.`) && f !== file).sort()) {
+      const lang = tfile.slice(slug.length + 1, -5);
+      if (!/^[a-z]{2}$/.test(lang)) continue;
+      const overlay = JSON.parse(fs.readFileSync(path.join(DATA, tfile), 'utf8'));
+      const unknown = [];
+      langs[lang] = merge(data, overlay, '', unknown);
+      if (validate) {
+        if (unknown.length) throw new DataError(`data/${tfile}\n  - not in data/${file}: ${unknown.join(', ')}`);
+        check(file, langs[lang]);
+      }
+    }
+    return { file, data, langs };
   });
+}
+
+/** Deep merge of a translation overlay onto the base data. Arrays merge item by item. */
+function merge(base, over, at, unknown) {
+  if (Array.isArray(over)) {
+    if (!Array.isArray(base) || over.length > base.length) unknown.push(at || '/');
+    return (base ?? []).map((b, i) => (i < over.length ? merge(b, over[i], `${at}[${i}]`, unknown) : b));
+  }
+  if (over && typeof over === 'object') {
+    if (!base || typeof base !== 'object') {
+      unknown.push(at || '/');
+      return base;
+    }
+    const out = { ...base };
+    for (const [k, v] of Object.entries(over)) {
+      if (!(k in base)) unknown.push(`${at}.${k}`);
+      else out[k] = merge(base[k], v, `${at}.${k}`, unknown);
+    }
+    return out;
+  }
+  return over;
 }
 
 function check(file, data) {
