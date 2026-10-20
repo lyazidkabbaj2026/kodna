@@ -28,7 +28,7 @@
           }
         },
         "logo": { "type": ["string", "null"], "description": "Path relative to media/<slug>/ (svg, png, jpg, webp)." },
-        "logoNote": { "type": ["string", "null"] }
+        "logoNote": { "type": ["string", "null"], "description": "Internal note, never shown to the client." }
       }
     },
     "date": { "type": "string", "description": "ISO date (2026-10-20) is formatted in French; any other string is shown as is." },
@@ -104,7 +104,7 @@
             ]
           }
         },
-        "note": { "type": "string" }
+        "note": { "type": "string", "description": "Internal note, never shown to the client (the page uses ui.giftLine)." }
       }
     },
     "cta": {

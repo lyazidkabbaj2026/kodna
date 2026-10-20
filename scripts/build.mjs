@@ -5,7 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import sharp from 'sharp';
 import * as esbuild from 'esbuild';
-import { loadClients, linkTokens, DataError, ROOT } from './lib/clients.mjs';
+import { loadClients, linkTokens, mediaPath, DataError, ROOT } from './lib/clients.mjs';
 import { renderProposal, render404 } from './lib/render.mjs';
 import { makeOgImage } from './lib/og.mjs';
 
@@ -90,7 +90,7 @@ const shared = { css, js, ui, markSvg, favicon, preloadFont: fontUrls['inter-lat
 const report = [];
 for (const { data } of clients) {
   const slug = data.client.slug;
-  const media = (rel) => path.join(ROOT, 'media', slug, rel);
+  const media = (rel) => mediaPath(slug, rel);
   const assets = { logo: null, concepts: [], gift: [] };
 
   if (data.client.logo) assets.logo = await image(media(data.client.logo), [240]);

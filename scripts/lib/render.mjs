@@ -1,7 +1,12 @@
 // HTML for one proposal. All client copy comes from the JSON; UI chrome strings from src/ui.fr.json.
 
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-const e = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ESC[c]);
+// Also keeps French thousands ("4 167 m") and number + unit together on one line.
+const e = (s) =>
+  String(s ?? '')
+    .replace(/[&<>"']/g, (c) => ESC[c])
+    .replace(/(\d) (?=\d{3}\b)/g, '$1\u00a0')
+    .replace(/(\d) (?=(m|km|h|s|Dh|%)\b)/g, '$1\u00a0');
 const t = (s, vars = {}) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
 
 // ---- helpers ---------------------------------------------------------------
@@ -14,9 +19,8 @@ function fmtDate(s) {
 function fmtTime(v) {
   if (v === undefined || v === null || v === '') return '';
   if (typeof v === 'string') return v;
-  const m = Math.floor(v / 60);
-  const s = v - m * 60;
-  return `${m}:${String(Math.floor(s)).padStart(2, '0')}${s % 1 ? `.${String(Math.round((s % 1) * 10))}` : ''}`;
+  const r = Math.round(v);
+  return `${Math.floor(r / 60)}:${String(r % 60).padStart(2, '0')}`;
 }
 
 function fmtMoney(n, currency = 'Dh') {
@@ -90,7 +94,6 @@ function pageCover({ data, assets, ui, markSvg }) {
         <p class="cover__meta">${e(data.client.name)}<br><span>${e(fmtDate(data.date))}</span></p>
         <p class="cover__hint">${e(ui.coverHint)} <span class="nudge">${ICON.arrowR}</span></p>
       </div>
-      ${data.client.logoNote ? `<p class="visually-hidden">${e(data.client.logoNote)}</p>` : ''}
     </div>`,
   };
 }
@@ -193,7 +196,7 @@ function pageShots({ c, a, ui }) {
             return `<li class="shot">
           <div class="shot__img">
             ${img({ asset: a.shots[i], alt: s.description, sizes: '(min-width: 600px) 260px, 64vw' })}
-            <span class="shot__n">${String(s.id ?? i + 1).padStart(2, '0')}</span>
+            <span class="shot__n">${String(i + 1).padStart(2, '0')}</span>
             ${tc ? `<span class="shot__tc">${e(tc)}</span>` : ''}
           </div>
           ${s.voiceover ? `<p class="shot__vo"><span class="visually-hidden">${e(ui.voiceover)} : </span>« ${e(s.voiceover)} »</p>` : ''}
@@ -213,7 +216,7 @@ function pageTerms({ data, assets, ui }) {
     tm.deliveryDays &&
       (tm.deliveryStartsAfter ? t(ui.deliveredIn, { d: tm.deliveryDays, after: tm.deliveryStartsAfter }) : t(ui.deliveredInShort, { d: tm.deliveryDays })),
     tm.revisionsIncluded && (tm.revisionsIncluded === 1 ? ui.revisions1 : t(ui.revisionsN, { n: tm.revisionsIncluded })),
-    tm.voiceover,
+    tm.voiceover && t(ui.voiceoverTerm, { v: tm.voiceover }),
     tm.format,
   ].filter(Boolean);
   const gift = data.gift;
@@ -242,7 +245,7 @@ function pageTerms({ data, assets, ui }) {
         <div>
           <p class="gift__badge">${e(ui.giftBadge)}</p>
           <p class="gift__title">${e(gift.title ?? '')}</p>
-          ${gift.note ? `<p class="gift__note">${e(gift.note)}</p>` : ''}
+          <p class="gift__note">${e(ui.giftLine)}</p>
         </div>
       </div>`
           : ''

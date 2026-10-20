@@ -13,6 +13,12 @@ const validateSchema = ajv.compile(JSON.parse(fs.readFileSync(path.join(DATA, 's
 
 export class DataError extends Error {}
 
+/** Absolute path of a media file. JSON paths may be relative to media/<slug>/ or start with "media/<slug>/". */
+export function mediaPath(slug, rel) {
+  const prefix = `media/${slug}/`;
+  return path.join(ROOT, 'media', slug, rel.startsWith(prefix) ? rel.slice(prefix.length) : rel);
+}
+
 /** Every data/<slug>.json, parsed and (by default) checked against the schema and media folder. */
 export function loadClients({ validate = true } = {}) {
   const files = fs.readdirSync(DATA).filter((f) => f.endsWith('.json') && !RESERVED.has(f) && !f.startsWith('_'));
@@ -30,9 +36,8 @@ function check(file, data) {
   } else {
     const slug = data.client.slug;
     if (file !== `${slug}.json`) errors.push(`file name must be ${slug}.json (client.slug)`);
-    const media = path.join(ROOT, 'media', slug);
     const need = (rel, where) => {
-      if (rel && !fs.existsSync(path.join(media, rel))) errors.push(`${where}: media/${slug}/${rel} not found`);
+      if (rel && !fs.existsSync(mediaPath(slug, rel))) errors.push(`${where}: ${path.relative(ROOT, mediaPath(slug, rel))} not found`);
     };
     need(data.client.logo, 'client.logo');
     const letters = new Set();

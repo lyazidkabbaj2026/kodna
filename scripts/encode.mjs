@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { loadClients, ROOT } from './lib/clients.mjs';
+import { loadClients, mediaPath, ROOT } from './lib/clients.mjs';
 
 const MAX_BYTES = 4 * 1024 * 1024;
 const AUDIO_KBPS = 128;
@@ -29,13 +29,13 @@ for (const { data } of loadClients({ validate: false })) {
   fs.mkdirSync(outDir, { recursive: true });
 
   for (const c of data.concepts) {
-    const src = path.join(ROOT, 'media', slug, c.video);
+    const src = mediaPath(slug, c.video);
     const base = path.basename(c.video, path.extname(c.video));
     const out = path.join(outDir, `${base}.mp4`);
     const poster = path.join(outDir, `${base}.poster.webp`);
     if (!fs.existsSync(src)) {
       if (fs.existsSync(out)) continue; // raw file not on this machine, encoded copy already committed
-      throw new Error(`${slug}: missing source video media/${slug}/${c.video}`);
+      throw new Error(`${slug}: missing source video ${path.relative(ROOT, src)}`);
     }
     const fresh = fs.existsSync(out) && fs.statSync(out).mtimeMs > fs.statSync(src).mtimeMs;
     if (fresh && !force) {

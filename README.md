@@ -22,7 +22,7 @@ scrolls on its own. To change page from there, swipe from the very edge of the s
 1. **Copy the data.** Put the client's JSON at `data/<slug>.json` (the file name must equal `client.slug`).
    It follows `data/schema.json`. All client copy lives there and nothing is hard-coded in the template.
 2. **Add the media** to `media/<slug>/`: the source videos (`concept-a.mp4`…), `shots/*.jpg`, logo, gift files.
-   Paths in the JSON are relative to this folder.
+   Paths in the JSON can be relative to this folder or start with `media/<slug>/`.
 3. **Encode the videos** (needs `ffmpeg`):
    ```bash
    npm run encode -- <slug>
@@ -47,6 +47,7 @@ and redeploy. On Vercel a missing token fails the build, so a link can't change 
 The build prints warnings that must be cleared:
 
 - `placeholder: true`: demo content. The page shows a red "DÉMO" badge. Remove the field for real proposals.
+- `gift.note` and `client.logoNote` are internal notes and never appear on the page.
 - `cta.confirmHandle`: set while the Instagram handle in `cta.instagramDm` is unconfirmed. Remove it once checked.
 
 ## Branding

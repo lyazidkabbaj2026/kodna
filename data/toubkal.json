@@ -1,28 +1,202 @@
 {
   "client": {
     "slug": "toubkal",
-    "name": "Toubkal",
-    "instagram": null,
-    "whatsapp": null,
+    "name": "Toubkal Hiking Beyond",
+    "instagram": "@toubkal_hiking_beyond_",
+    "whatsapp": "+212 612-537321",
     "colors": {
-      "primary": "#B5542D",
-      "secondary": "#2F4A3A",
-      "accent": "#E8B04A"
+      "primary": "#2E5A3C",
+      "secondary": "#EFE6D2",
+      "accent": "#E8873A"
     },
-    "logo": "logo.svg",
-    "logoNote": "Logo reconstruit par Kodna (approximation)."
+    "logo": "media/toubkal/logo.svg",
+    "logoNote": "Rebuilt wordmark, approximation of the client logo (no original file received)."
   },
-  "placeholder": true,
   "date": "2026-10-20",
   "language": "fr",
   "voiceoverLanguage": "Darija",
-  "disclaimer": "Ces vidéos sont un aperçu du concept, pas la vidéo finale.",
+  "disclaimer": "Aperçu du concept, pas la vidéo finale.",
   "finalAdds": [
-    "Tournage et images de qualité finale",
-    "Voix off professionnelle en Darija",
-    "Musique sous licence",
-    "Montage, rythme et étalonnage soignés",
-    "Sous-titres et logo animé"
+    "Images animées",
+    "Musique faite pour la vidéo",
+    "Meilleurs effets sonores",
+    "Voix off finalisée",
+    "Sous-titres",
+    "Motion design et textes"
+  ],
+  "concepts": [
+    {
+      "letter": "A",
+      "title": "L9emma hiya sahla",
+      "idea": "On part de ce qui fait hésiter (le transport, le guide, le logement, les repas) et on montre que l'agence s'occupe de tout. Le sommet devient la partie facile.",
+      "why": [
+        "Répond aux vraies questions avant qu'on les pose",
+        "La liste cochée montre tout ce qui est inclus"
+      ],
+      "durationSec": 24,
+      "video": "media/toubkal/concept-a.mp4",
+      "poster": "media/toubkal/shots/ta1.jpg",
+      "shots": [
+        {
+          "id": "ta1",
+          "image": "media/toubkal/shots/ta1.jpg",
+          "start": 0,
+          "end": 2.92,
+          "voiceover": "Bghiti tetle3 l Toubkal? L9emma hiya sahla.",
+          "description": "Lever de soleil au sommet du Toubkal : un randonneur bras levés, le groupe derrière lui, à côté du trépied."
+        },
+        {
+          "id": "ta2",
+          "image": "media/toubkal/shots/ta2.jpg",
+          "start": 2.92,
+          "end": 4.85,
+          "voiceover": "Li s3ib howa dakchi li 9bel.",
+          "description": "Le téléphone : une note « Toubkal — plan » remplie de points d'interrogation."
+        },
+        {
+          "id": "ta3a",
+          "image": "media/toubkal/shots/ta3a.jpg",
+          "start": 4.85,
+          "end": 5.98,
+          "voiceover": "Chkoun ghadi yweslek?",
+          "description": "Un randonneur seul au bord de la route d'Imlil. Pas de transport."
+        },
+        {
+          "id": "ta3b",
+          "image": "media/toubkal/shots/ta3b.jpg",
+          "start": 5.98,
+          "end": 6.74,
+          "voiceover": "Chkoun lguide?",
+          "description": "Le sentier se divise en trois. Par où passer sans guide ?"
+        },
+        {
+          "id": "ta3c",
+          "image": "media/toubkal/shots/ta3c.jpg",
+          "start": 6.74,
+          "end": 7.64,
+          "voiceover": "Fin ghadi tn3es?",
+          "description": "La nuit tombe en montagne. Où dormir ?"
+        },
+        {
+          "id": "ta3d",
+          "image": "media/toubkal/shots/ta3d.jpg",
+          "start": 7.64,
+          "end": 8.66,
+          "voiceover": "Chno ghadi takol?",
+          "description": "Un réchaud et une casserole vide. Quoi manger ?"
+        },
+        {
+          "id": "ta4",
+          "image": "media/toubkal/shots/ta4.jpg",
+          "start": 8.66,
+          "end": 14.75,
+          "voiceover": "7na kantkelfo bkolchi. Transport mn Marrakech, guide, dar dyafa, refuge, w lmakla kamla.",
+          "description": "Le groupe monte avec le mulet. La liste se coche au rythme de la voix : transport, guide, dar dyafa, refuge, repas."
+        },
+        {
+          "id": "ta5",
+          "image": "media/toubkal/shots/ta5.jpg",
+          "start": 14.75,
+          "end": 16,
+          "voiceover": "Nta ghir aji.",
+          "description": "Gros plan : les chaussures avancent sur le sentier."
+        },
+        {
+          "id": "ta6",
+          "image": "media/toubkal/shots/ta6.jpg",
+          "start": 16,
+          "end": 20.78,
+          "voiceover": "Rb3a alaf w miya w seb3a w settin metre. A3la 9emma f chmal Ifri9ya.",
+          "description": "Le groupe au sommet. Le compteur monte jusqu'à 4 167 m."
+        },
+        {
+          "id": "ta7",
+          "image": "media/toubkal/shots/ta7.jpg",
+          "start": 20.78,
+          "end": 23.56,
+          "voiceover": "Telt iyam, mn jm3a l 7ed. WhatsApp.",
+          "description": "Carte de fin : logo, « 3 jours · vendredi → dimanche », ce qui est inclus, bouton WhatsApp, compte Instagram."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Jem3a → L7ed",
+      "idea": "Le week-end raconté heure par heure, du départ de Marrakech au sommet au lever du soleil. On vit l'aventure avant de la réserver.",
+      "why": [
+        "Montre que 3 jours suffisent",
+        "Fait rêver avec le lever de soleil à 4 167 m"
+      ],
+      "durationSec": 27,
+      "video": "media/toubkal/concept-b.mp4",
+      "poster": "media/toubkal/shots/tb1a.jpg",
+      "shots": [
+        {
+          "id": "tb1a",
+          "image": "media/toubkal/shots/tb1a.jpg",
+          "start": 0,
+          "end": 2.15,
+          "voiceover": "Jem3a. Katkhrej mn Marrakech.",
+          "description": "Vendredi. Le van quitte Marrakech vers l'Atlas."
+        },
+        {
+          "id": "tb1b",
+          "image": "media/toubkal/shots/tb1b.jpg",
+          "start": 2.15,
+          "end": 3.45,
+          "voiceover": "Katbat f Imlil.",
+          "description": "Arrivée de nuit à Imlil, les fenêtres de la dar dyafa allumées."
+        },
+        {
+          "id": "tb2a",
+          "image": "media/toubkal/shots/tb2a.jpg",
+          "start": 3.45,
+          "end": 6.25,
+          "voiceover": "Sebt. Sta d swaye3 dl hiking.",
+          "description": "Samedi. Le groupe monte en lacets. Badge « 6h »."
+        },
+        {
+          "id": "tb2b",
+          "image": "media/toubkal/shots/tb2b.jpg",
+          "start": 6.25,
+          "end": 9.15,
+          "voiceover": "Refuge, telt alaf w mitin w seb3a metre.",
+          "description": "Le refuge et les tentes. Badge « 3 207 m »."
+        },
+        {
+          "id": "tb3",
+          "image": "media/toubkal/shots/tb3.jpg",
+          "start": 9.15,
+          "end": 12.05,
+          "voiceover": "L7ed, m3a lkhmsa d sba7. Lfrontale.",
+          "description": "Dimanche, 5h. Une file de frontales monte dans la nuit."
+        },
+        {
+          "id": "tb4",
+          "image": "media/toubkal/shots/tb4.jpg",
+          "start": 12.05,
+          "end": 18.8,
+          "voiceover": "M3a tmenya d sba7. Rb3a alaf w miya w seb3a w settin metre. A3la 9emma f chmal Ifri9ya.",
+          "description": "8h. Le soleil se lève au sommet, le compteur monte jusqu'à 4 167 m."
+        },
+        {
+          "id": "tb5",
+          "image": "media/toubkal/shots/tb5.jpg",
+          "start": 18.8,
+          "end": 23.65,
+          "voiceover": "L7ed b lil, katkon f darek. Weekend wa7ed ghatb9a t3awed 3lih snin.",
+          "description": "Dimanche soir, à la maison : il fait défiler les photos du week-end."
+        },
+        {
+          "id": "tb6",
+          "image": "media/toubkal/shots/tb6.jpg",
+          "start": 23.65,
+          "end": 26.59,
+          "voiceover": "Kayn départ kol weekend. Tasl bina f WhatsApp.",
+          "description": "Carte de fin : « Départ kol weekend », bouton WhatsApp, compte Instagram. Les dates de départ sont mises à jour à la livraison."
+        }
+      ]
+    }
   ],
   "terms": {
     "currency": "Dh",
@@ -32,111 +206,17 @@
     "deliveryDays": 2,
     "deliveryStartsAfter": "l'acompte et le choix du concept",
     "revisionsIncluded": 1,
-    "format": "Vidéo verticale 9:16 (Reels, Stories, TikTok)",
-    "voiceover": "Voix off en Darija incluse",
+    "format": "Vidéo verticale 9:16 HD (MP4) pour Instagram, TikTok et WhatsApp",
+    "voiceover": "Darija, incluse",
     "extraLanguage": {
-      "language": "Langue supplémentaire",
+      "language": "Anglais",
       "price": 200
     }
   },
+  "gift": null,
   "cta": {
-    "text": "Répondez simplement « A » ou « B » dans notre conversation Instagram. On lance dès réception de l'acompte.",
+    "text": "Répondez A ou B dans notre conversation Instagram, et on lance.",
     "instagramDm": "https://ig.me/m/kodna.ma",
-    "confirmHandle": true
-  },
-  "concepts": [
-    {
-      "letter": "A",
-      "title": "Titre du concept A (démo)",
-      "idea": "Texte de démonstration : l'idée du concept A en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
-      "why": [
-        "Premier argument du concept A (démo).",
-        "Deuxième argument du concept A (démo)."
-      ],
-      "durationSec": 20,
-      "video": "concept-a.mp4",
-      "poster": null,
-      "shots": [
-        {
-          "id": 1,
-          "image": "shots/a1.jpg",
-          "start": "0:00",
-          "end": "0:05",
-          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 1 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 2,
-          "image": "shots/a2.jpg",
-          "start": "0:05",
-          "end": "0:10",
-          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 2 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 3,
-          "image": "shots/a3.jpg",
-          "start": "0:10",
-          "end": "0:15",
-          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 3 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 4,
-          "image": "shots/a4.jpg",
-          "start": "0:15",
-          "end": "0:20",
-          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 4 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        }
-      ]
-    },
-    {
-      "letter": "B",
-      "title": "Titre du concept B (démo)",
-      "idea": "Texte de démonstration : l'idée du concept B en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
-      "why": [
-        "Premier argument du concept B (démo).",
-        "Deuxième argument du concept B (démo)."
-      ],
-      "durationSec": 20,
-      "video": "concept-b.mp4",
-      "poster": null,
-      "shots": [
-        {
-          "id": 1,
-          "image": "shots/b1.jpg",
-          "start": "0:00",
-          "end": "0:05",
-          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 1 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 2,
-          "image": "shots/b2.jpg",
-          "start": "0:05",
-          "end": "0:10",
-          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 2 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 3,
-          "image": "shots/b3.jpg",
-          "start": "0:10",
-          "end": "0:15",
-          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 3 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 4,
-          "image": "shots/b4.jpg",
-          "start": "0:15",
-          "end": "0:20",
-          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 4 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        }
-      ]
-    }
-  ],
-  "gift": null
+    "confirmHandle": "@kodna.ma (CONFIRM with Lyazid)"
+  }
 }

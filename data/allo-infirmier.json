@@ -2,27 +2,169 @@
   "client": {
     "slug": "allo-infirmier",
     "name": "Allo Infirmier",
-    "instagram": null,
-    "whatsapp": null,
+    "instagram": "@allo_infirmier1",
+    "whatsapp": "+212 625-538015",
     "colors": {
-      "primary": "#1E7FC2",
-      "secondary": "#0F3D5E",
-      "accent": "#3BB39A"
+      "primary": "#163A5C",
+      "secondary": "#FFFFFF",
+      "accent": "#8ACDFC"
     },
-    "logo": "logo/logo.svg",
+    "logo": "media/allo-infirmier/logo/AlloInfirmier_logo_vectoriel.svg",
     "logoNote": null
   },
-  "placeholder": true,
   "date": "2026-10-20",
   "language": "fr",
   "voiceoverLanguage": "Darija",
-  "disclaimer": "Ces vidéos sont un aperçu du concept, pas la vidéo finale.",
+  "disclaimer": "Aperçu du concept, pas la vidéo finale.",
   "finalAdds": [
-    "Tournage et images de qualité finale",
-    "Voix off professionnelle en Darija",
-    "Musique sous licence",
-    "Montage, rythme et étalonnage soignés",
-    "Sous-titres et logo animé"
+    "Images animées",
+    "Musique faite pour la vidéo",
+    "Meilleurs effets sonores",
+    "Voix off finalisée",
+    "Sous-titres",
+    "Motion design et textes"
+  ],
+  "concepts": [
+    {
+      "letter": "A",
+      "title": "L3iyada katji 3ndek",
+      "idea": "On compare la galère (le taxi, la file d'attente, la matinée perdue) à la solution : c'est la clinique qui vient chez vous. Puis on montre les services et la couverture 24/24 sur tout Marrakech.",
+      "why": [
+        "Message clair en moins de 10 secondes",
+        "Met en avant toute la liste des services"
+      ],
+      "durationSec": 23,
+      "video": "media/allo-infirmier/concept-a.mp4",
+      "poster": "media/allo-infirmier/shots/aa1.jpg",
+      "shots": [
+        {
+          "id": "aa1",
+          "image": "media/allo-infirmier/shots/aa1.jpg",
+          "start": 0,
+          "end": 3.1,
+          "voiceover": "Lbra. Pansement. Ta7lil dyal ddem.",
+          "description": "Seringue, pansement, tube de prise de sang : chaque objet est entouré au moment où la voix le cite."
+        },
+        {
+          "id": "aa2a",
+          "image": "media/allo-infirmier/shots/aa2a.jpg",
+          "start": 3.1,
+          "end": 7.05,
+          "voiceover": "W ghir bach dir hadchi: taxi, ssef,",
+          "description": "Le taxi coincé dans les bouchons, en plein soleil."
+        },
+        {
+          "id": "aa2b",
+          "image": "media/allo-infirmier/shots/aa2b.jpg",
+          "start": 7.05,
+          "end": 9.4,
+          "voiceover": "w sba7 kamel da3.",
+          "description": "Salle d'attente pleine : ticket N° 47 en main, l'écran affiche N° 12."
+        },
+        {
+          "id": "aa3",
+          "image": "media/allo-infirmier/shots/aa3.jpg",
+          "start": 9.4,
+          "end": 13.1,
+          "voiceover": "M3a Allo Infirmier, l3iyada hiya li katji 7tta l3ndek.",
+          "description": "L'infirmière arrive à la porte avec sa trousse. Le logo Allo Infirmier apparaît."
+        },
+        {
+          "id": "aa4",
+          "image": "media/allo-infirmier/shots/aa4.jpg",
+          "start": 13.1,
+          "end": 18.2,
+          "voiceover": "Les piqûres, sérum, pansement, ta7alil, w tetbe3 dyal skkar w tension.",
+          "description": "Prise de tension à domicile. Les services s'affichent un par un, au rythme de la voix."
+        },
+        {
+          "id": "aa5",
+          "image": "media/allo-infirmier/shots/aa5.jpg",
+          "start": 18.2,
+          "end": 20.4,
+          "voiceover": "F Marrakech kamla, lil w nhar.",
+          "description": "Carte de Marrakech : les points s'allument partout. Badge « 24/24 · 7/7 »."
+        },
+        {
+          "id": "aa6",
+          "image": "media/allo-infirmier/shots/aa6.jpg",
+          "start": 20.4,
+          "end": 23.41,
+          "voiceover": "Allo Infirmier. Ghir sift lina message f WhatsApp.",
+          "description": "Carte de fin : logo, « Lil w nhar · Marrakech kamla », bouton WhatsApp, +1 500 interventions, Instagram."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Loin de Mama",
+      "idea": "Une petite histoire : un fils bloqué en réunion, sa mère qui a sa perfusion aujourd'hui. Un vocal WhatsApp, une infirmière chez elle, et Mama qui rappelle pour dire que tout va bien.",
+      "why": [
+        "Joue sur la confiance et l'émotion",
+        "Parle directement aux enfants qui s'occupent de leurs parents"
+      ],
+      "durationSec": 22,
+      "video": "media/allo-infirmier/concept-b.mp4",
+      "poster": "media/allo-infirmier/shots/ab1.jpg",
+      "shots": [
+        {
+          "id": "ab1",
+          "image": "media/allo-infirmier/shots/ab1.jpg",
+          "start": 0,
+          "end": 3.1,
+          "voiceover": "L3echra. Réunion. W mama 3ndha sérum lyouma.",
+          "description": "10h, réunion. Une notification arrive : « Mama — sérum lyouma »."
+        },
+        {
+          "id": "ab2",
+          "image": "media/allo-infirmier/shots/ab2.jpg",
+          "start": 3.1,
+          "end": 5.95,
+          "voiceover": "Man9derch nkoun f jouj blayes f nefs lwe9t.",
+          "description": "Écran partagé : lui au bureau, Mama chez elle."
+        },
+        {
+          "id": "ab3",
+          "image": "media/allo-infirmier/shots/ab3.jpg",
+          "start": 5.95,
+          "end": 7.95,
+          "voiceover": "An sift vocal l Allo Infirmier.",
+          "description": "Dans le couloir, il envoie un message vocal WhatsApp à Allo Infirmier."
+        },
+        {
+          "id": "ab4",
+          "image": "media/allo-infirmier/shots/ab4.jpg",
+          "start": 7.95,
+          "end": 10.1,
+          "voiceover": "Sifto l'infirmière l dar 3nd mama.",
+          "description": "L'infirmière sonne chez Mama."
+        },
+        {
+          "id": "ab5",
+          "image": "media/allo-infirmier/shots/ab5.jpg",
+          "start": 10.1,
+          "end": 14.6,
+          "voiceover": "L7dach w nos, hahya kat3ayet lia: « Jat l'infirmière, kolchi mzyan a wldi. »",
+          "description": "11h30 : son téléphone sonne sur la table, appel entrant de Mama."
+        },
+        {
+          "id": "ab6",
+          "image": "media/allo-infirmier/shots/ab6.jpg",
+          "start": 14.6,
+          "end": 18.1,
+          "voiceover": "Ma9dertch nkoun 7daha, walakin l9it chi wa7ed ntti9 fih.",
+          "description": "Chez Mama : l'infirmière s'occupe de la perfusion, Mama est installée dans son fauteuil."
+        },
+        {
+          "id": "ab7",
+          "image": "media/allo-infirmier/shots/ab7.jpg",
+          "start": 18.1,
+          "end": 22.28,
+          "voiceover": "Allo Infirmier. Soins f ddar, lil w nhar, f Marrakech kamla.",
+          "description": "Carte de fin : logo, « Soins f ddar · lil w nhar », bouton WhatsApp, +1 500 interventions, Instagram."
+        }
+      ]
+    }
   ],
   "terms": {
     "currency": "Dh",
@@ -32,126 +174,24 @@
     "deliveryDays": 2,
     "deliveryStartsAfter": "l'acompte et le choix du concept",
     "revisionsIncluded": 1,
-    "format": "Vidéo verticale 9:16 (Reels, Stories, TikTok)",
-    "voiceover": "Voix off en Darija incluse",
+    "format": "Vidéo verticale 9:16 HD (MP4) pour Instagram, TikTok et WhatsApp",
+    "voiceover": "Darija, incluse",
     "extraLanguage": {
-      "language": "Langue supplémentaire",
+      "language": "Français",
       "price": 200
     }
   },
-  "cta": {
-    "text": "Répondez simplement « A » ou « B » dans notre conversation Instagram. On lance dès réception de l'acompte.",
-    "instagramDm": "https://ig.me/m/kodna.ma",
-    "confirmHandle": true
-  },
-  "concepts": [
-    {
-      "letter": "A",
-      "title": "Titre du concept A (démo)",
-      "idea": "Texte de démonstration : l'idée du concept A en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
-      "why": [
-        "Premier argument du concept A (démo).",
-        "Deuxième argument du concept A (démo)."
-      ],
-      "durationSec": 20,
-      "video": "concept-a.mp4",
-      "poster": null,
-      "shots": [
-        {
-          "id": 1,
-          "image": "shots/a1.jpg",
-          "start": "0:00",
-          "end": "0:05",
-          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 1 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 2,
-          "image": "shots/a2.jpg",
-          "start": "0:05",
-          "end": "0:10",
-          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 2 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 3,
-          "image": "shots/a3.jpg",
-          "start": "0:10",
-          "end": "0:15",
-          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 3 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 4,
-          "image": "shots/a4.jpg",
-          "start": "0:15",
-          "end": "0:20",
-          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 4 du concept A : description de démonstration de ce que l'on voit à l'écran."
-        }
-      ]
-    },
-    {
-      "letter": "B",
-      "title": "Titre du concept B (démo)",
-      "idea": "Texte de démonstration : l'idée du concept B en une ou deux phrases. Remplacé par le contenu du fichier JSON fourni dans le kit.",
-      "why": [
-        "Premier argument du concept B (démo).",
-        "Deuxième argument du concept B (démo)."
-      ],
-      "durationSec": 20,
-      "video": "concept-b.mp4",
-      "poster": null,
-      "shots": [
-        {
-          "id": 1,
-          "image": "shots/b1.jpg",
-          "start": "0:00",
-          "end": "0:05",
-          "voiceover": "Ligne de voix off 1 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 1 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 2,
-          "image": "shots/b2.jpg",
-          "start": "0:05",
-          "end": "0:10",
-          "voiceover": "Ligne de voix off 2 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 2 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 3,
-          "image": "shots/b3.jpg",
-          "start": "0:10",
-          "end": "0:15",
-          "voiceover": "Ligne de voix off 3 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 3 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 4,
-          "image": "shots/b4.jpg",
-          "start": "0:15",
-          "end": "0:20",
-          "voiceover": "Ligne de voix off 4 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 4 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        },
-        {
-          "id": 5,
-          "image": "shots/b5.jpg",
-          "start": "0:20",
-          "end": "0:25",
-          "voiceover": "Ligne de voix off 5 (démo, Darija dans le vrai fichier)",
-          "description": "Plan 5 du concept B : description de démonstration de ce que l'on voit à l'écran."
-        }
-      ]
-    }
-  ],
   "gift": {
     "title": "Votre logo en HD, offert",
     "files": [
-      "logo/logo.svg",
-      "logo/logo.png"
+      "media/allo-infirmier/logo/AlloInfirmier_logo_2048.png",
+      "media/allo-infirmier/logo/AlloInfirmier_logo_blanc_2048.png"
     ],
-    "note": "Nous avons redessiné votre logo en haute définition. Il vous sera remis avec la vidéo."
+    "note": "Vector redraw of their blurry logo. Show it on a page; offer the SVG on request."
+  },
+  "cta": {
+    "text": "Répondez A ou B dans notre conversation Instagram, et on lance.",
+    "instagramDm": "https://ig.me/m/kodna.ma",
+    "confirmHandle": "@kodna.ma (CONFIRM with Lyazid)"
   }
 }

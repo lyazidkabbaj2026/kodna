@@ -374,17 +374,20 @@ video {
   opacity: 0.5;
 }
 .cover__logo {
-  width: 52px;
   height: 52px;
+  min-width: 52px;
+  max-width: 150px;
   border-radius: 14px;
   background: #fff;
-  padding: 6px;
-  display: grid;
-  place-items: center;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .cover__logo img {
-  width: 100%;
+  width: auto;
   height: 100%;
+  max-width: 100%;
   object-fit: contain;
 }
 .cover__main {
