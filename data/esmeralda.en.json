@@ -1,0 +1,102 @@
+{
+  "disclaimer": "Concept preview, not the final video.",
+  "finalAdds": [
+    "Animated visuals",
+    "Music made for the video",
+    "Better sound effects",
+    "Final voiceover",
+    "Subtitles",
+    "Motion design and text"
+  ],
+  "concepts": [
+    {
+      "idea": "A couple’s day in Chefchaouen: breakfast at the hotel, the medina 8 minutes away, Ras el Ma, the sunset, then back to the Esmeralda, the pool under the stars and the suite.",
+      "why": [
+        "Sells the town and the hotel together",
+        "Shows the indoor pool, unique in Chefchaouen"
+      ],
+      "shots": [
+        {
+          "description": "Morning: the couple has breakfast in the hotel lounge."
+        },
+        {
+          "description": "They leave the hotel and walk down to the blue medina. “8 min on foot” badge."
+        },
+        {
+          "description": "In a blue alley, she takes a photo of him on the steps."
+        },
+        {
+          "description": "A break by Ras el Ma, the blue houses above."
+        },
+        {
+          "description": "Sunset over Chefchaouen from the Spanish mosque."
+        },
+        {
+          "description": "Night: back at the Esmeralda, its façade lit up."
+        },
+        {
+          "description": "The indoor pool under the starry ceiling, feet in the water."
+        },
+        {
+          "description": "The suite in the evening, the town lights in the window."
+        },
+        {
+          "description": "End card: logo, “Pool · Breakfast · Parking”, 8 min from the medina, Book button, WhatsApp, Instagram."
+        }
+      ]
+    },
+    {
+      "idea": "A family arriving in Chefchaouen: the real questions (where to sleep, where to park, the kids’ breakfast), then the Esmeralda answers them all.",
+      "why": [
+        "Answers families’ real worries",
+        "Each benefit is ticked in time with the voice"
+      ],
+      "shots": [
+        {
+          "description": "The family arrives by car, Chefchaouen appears through the windscreen."
+        },
+        {
+          "description": "The problem: suitcases to carry up the medina’s stairs."
+        },
+        {
+          "description": "The problem: nowhere to park."
+        },
+        {
+          "description": "The problem: and the kids’ breakfast?"
+        },
+        {
+          "description": "At the Esmeralda, the car is parked out front: ✓ Parking."
+        },
+        {
+          "description": "The kids at the breakfast buffet: ✓ Breakfast."
+        },
+        {
+          "description": "The triple room, the kids jumping on the beds: ✓ Room for three."
+        },
+        {
+          "description": "The marble bathroom with bathrobes."
+        },
+        {
+          "description": "The kids in the indoor pool, the parents by the edge."
+        },
+        {
+          "description": "The family walking to the medina, 8 minutes away."
+        },
+        {
+          "description": "End card: logo, benefits, Book button, WhatsApp, Instagram."
+        }
+      ]
+    }
+  ],
+  "terms": {
+    "deliveryStartsAfter": "the deposit and your choice of concept",
+    "format": "Vertical 9:16 HD video (MP4) for Instagram, TikTok and WhatsApp",
+    "voiceover": "Darija, included",
+    "extraLanguage": {
+      "language": "French or English"
+    }
+  },
+  "cta": {
+    "text": "Reply A or B in our Instagram conversation, and we get started."
+  }
+}

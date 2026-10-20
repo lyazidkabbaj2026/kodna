@@ -1,0 +1,237 @@
+{
+  "client": {
+    "slug": "esmeralda",
+    "name": "Hôtel Esmeralda",
+    "instagram": "@hotelesmeralda",
+    "whatsapp": "+212 661-666627",
+    "colors": {
+      "primary": "#0F4C43",
+      "secondary": "#F6F0E4",
+      "accent": "#B9825A"
+    },
+    "logo": "media/esmeralda/logo.png",
+    "logoNote": null
+  },
+  "date": "2026-10-20",
+  "language": "fr",
+  "voiceoverLanguage": "Darija",
+  "disclaimer": "Aperçu du concept, pas la vidéo finale.",
+  "finalAdds": [
+    "Images animées",
+    "Musique faite pour la vidéo",
+    "Meilleurs effets sonores",
+    "Voix off finalisée",
+    "Sous-titres",
+    "Motion design et textes"
+  ],
+  "concepts": [
+    {
+      "letter": "A",
+      "title": "Nhar f Chaouen",
+      "idea": "Une journée de couple à Chefchaouen : petit-déjeuner à l'hôtel, la médina à 8 minutes, Ras el Ma, le coucher de soleil, puis le retour à l'Esmeralda, la piscine sous les étoiles et la suite.",
+      "why": [
+        "Vend la ville et l'hôtel ensemble",
+        "Montre la piscine intérieure, unique à Chaouen"
+      ],
+      "durationSec": 26,
+      "video": "media/esmeralda/concept-a.mp4",
+      "poster": "media/esmeralda/shots/ea1.jpg",
+      "shots": [
+        {
+          "id": "ea1",
+          "image": "media/esmeralda/shots/ea1.jpg",
+          "start": 0,
+          "end": 3.7,
+          "voiceover": "Katfi9 sba7 f Chaouen, w lftour wajed lik f l'hôtel.",
+          "description": "Le matin : le couple prend le petit-déjeuner dans le salon de l'hôtel."
+        },
+        {
+          "id": "ea2",
+          "image": "media/esmeralda/shots/ea2.jpg",
+          "start": 3.7,
+          "end": 6,
+          "voiceover": "Ghir 8 d9aye9 3la rejlik, w katl9a rask f lmdina zzer9a.",
+          "description": "Ils sortent de l'hôtel et descendent vers la médina bleue. Badge « 8 min à pied »."
+        },
+        {
+          "id": "ea3",
+          "image": "media/esmeralda/shots/ea3.jpg",
+          "start": 6,
+          "end": 9.95,
+          "voiceover": "Kol zen9a fiha chi blassa zwina tswwer fiha.",
+          "description": "Dans une ruelle bleue, elle prend une photo de lui dans l'escalier."
+        },
+        {
+          "id": "ea4",
+          "image": "media/esmeralda/shots/ea4.jpg",
+          "start": 9.95,
+          "end": 11.7,
+          "voiceover": "Douz 3la Ras lma, w tferrej f lghroub mn Jame3 Sbanyoul.",
+          "description": "Pause au bord de Ras el Ma, les maisons bleues au-dessus."
+        },
+        {
+          "id": "ea5",
+          "image": "media/esmeralda/shots/ea5.jpg",
+          "start": 11.7,
+          "end": 14.4,
+          "voiceover": "",
+          "description": "Coucher de soleil sur Chefchaouen depuis la mosquée espagnole."
+        },
+        {
+          "id": "ea6",
+          "image": "media/esmeralda/shots/ea6.jpg",
+          "start": 14.4,
+          "end": 17.6,
+          "voiceover": "W mlli kayti7 lil, katrje3 l'Esmeralda.",
+          "description": "La nuit : retour à l'Esmeralda, façade illuminée."
+        },
+        {
+          "id": "ea7",
+          "image": "media/esmeralda/shots/ea7.jpg",
+          "start": 17.6,
+          "end": 20.2,
+          "voiceover": "Piscine t7t sma 3amra b nnjoum.",
+          "description": "La piscine intérieure sous le plafond étoilé, les pieds dans l'eau."
+        },
+        {
+          "id": "ea8",
+          "image": "media/esmeralda/shots/ea8.jpg",
+          "start": 20.2,
+          "end": 23.1,
+          "voiceover": "W bit mouri7, fih kolchi bach terta7.",
+          "description": "La suite le soir, les lumières de la ville à la fenêtre."
+        },
+        {
+          "id": "ea9",
+          "image": "media/esmeralda/shots/ea9.jpg",
+          "start": 23.1,
+          "end": 26.44,
+          "voiceover": "Hôtel Esmeralda, Chaouen. Reserver daba.",
+          "description": "Carte de fin : logo, « Piscine · Ftour · Parking », 8 min de la médina, bouton Réserver, WhatsApp, Instagram."
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Fin ghadi tn3es f Chaouen?",
+      "idea": "Une famille qui arrive à Chaouen : les vraies questions (où dormir, où se garer, le petit-déjeuner des enfants), puis l'Esmeralda qui répond à tout.",
+      "why": [
+        "Répond aux soucis des familles",
+        "Chaque avantage est coché au rythme de la voix"
+      ],
+      "durationSec": 23,
+      "video": "media/esmeralda/concept-b.mp4",
+      "poster": "media/esmeralda/shots/eb1.jpg",
+      "shots": [
+        {
+          "id": "eb1",
+          "image": "media/esmeralda/shots/eb1.jpg",
+          "start": 0,
+          "end": 1.9,
+          "voiceover": "Bghiti tmchi l Chaouen m3a l3a2ila?",
+          "description": "La famille arrive en voiture, Chefchaouen apparaît dans le pare-brise."
+        },
+        {
+          "id": "eb2",
+          "image": "media/esmeralda/shots/eb2.jpg",
+          "start": 1.9,
+          "end": 3.25,
+          "voiceover": "Walakin fin ghadi tbatou?",
+          "description": "Le problème : les valises à monter dans les escaliers de la médina."
+        },
+        {
+          "id": "eb3",
+          "image": "media/esmeralda/shots/eb3.jpg",
+          "start": 3.25,
+          "end": 4.7,
+          "voiceover": "Fin ghadi tparki tomobil?",
+          "description": "Le problème : aucune place pour se garer."
+        },
+        {
+          "id": "eb1b",
+          "image": "media/esmeralda/shots/eb1b.jpg",
+          "start": 4.7,
+          "end": 6.1,
+          "voiceover": "W bach ghadi yftero lwlad?",
+          "description": "Le problème : et le petit-déjeuner des enfants ?"
+        },
+        {
+          "id": "eb4",
+          "image": "media/esmeralda/shots/eb4.jpg",
+          "start": 6.1,
+          "end": 9.3,
+          "voiceover": "F Esmeralda, kolchi wajed lik. Parking, ftour,",
+          "description": "À l'Esmeralda, la voiture est garée devant : ✓ Parking."
+        },
+        {
+          "id": "eb5",
+          "image": "media/esmeralda/shots/eb5.jpg",
+          "start": 9.3,
+          "end": 10.05,
+          "voiceover": "",
+          "description": "Les enfants au buffet du petit-déjeuner : ✓ Ftour."
+        },
+        {
+          "id": "eb6",
+          "image": "media/esmeralda/shots/eb6.jpg",
+          "start": 10.05,
+          "end": 12.3,
+          "voiceover": "w bit mouri7 l tlata dyal nnas.",
+          "description": "La chambre triple, les enfants sautent sur les lits : ✓ Bit l tlata."
+        },
+        {
+          "id": "eb7",
+          "image": "media/esmeralda/shots/eb7.jpg",
+          "start": 12.3,
+          "end": 13.85,
+          "voiceover": "Salle de bain b lmarbre,",
+          "description": "La salle de bain en marbre avec peignoirs."
+        },
+        {
+          "id": "eb8",
+          "image": "media/esmeralda/shots/eb8.jpg",
+          "start": 13.85,
+          "end": 15.25,
+          "voiceover": "w piscine f l'hôtel.",
+          "description": "Les enfants dans la piscine intérieure, les parents au bord."
+        },
+        {
+          "id": "eb9",
+          "image": "media/esmeralda/shots/eb9.jpg",
+          "start": 15.25,
+          "end": 19.1,
+          "voiceover": "W ghir 8 d9aye9 3la rejlik, w katl9a rask f lmdina zzer9a.",
+          "description": "En famille vers la médina, à 8 minutes à pied."
+        },
+        {
+          "id": "eb10",
+          "image": "media/esmeralda/shots/eb10.jpg",
+          "start": 19.1,
+          "end": 22.6,
+          "voiceover": "Hôtel Esmeralda, Chaouen. Reserver daba.",
+          "description": "Carte de fin : logo, avantages, bouton Réserver, WhatsApp, Instagram."
+        }
+      ]
+    }
+  ],
+  "terms": {
+    "currency": "Dh",
+    "price": 800,
+    "deposit": 400,
+    "onDelivery": 400,
+    "deliveryDays": 2,
+    "deliveryStartsAfter": "l'acompte et le choix du concept",
+    "revisionsIncluded": 1,
+    "format": "Vidéo verticale 9:16 HD (MP4) pour Instagram, TikTok et WhatsApp",
+    "voiceover": "Darija, incluse",
+    "extraLanguage": {
+      "language": "Français ou anglais",
+      "price": 200
+    }
+  },
+  "gift": null,
+  "cta": {
+    "text": "Répondez A ou B dans notre conversation Instagram, et on lance.",
+    "instagramDm": "https://ig.me/m/kodna.ma"
+  }
+}
