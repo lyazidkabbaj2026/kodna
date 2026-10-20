@@ -14,7 +14,13 @@ export function renderStats({ clients, css, favicon, markSvg }) {
 <title>Kodna · Views</title>
 <link rel="icon" href="${favicon}" type="image/svg+xml">
 <style>${css}
-html,body{overflow:auto;height:auto;background:var(--k-paper)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--k-paper);color:var(--k-text);font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,p{margin:0}
+svg{display:block;width:100%;height:100%}
+.lockup{display:inline-flex;align-items:center;gap:10px}.lockup__mark{width:24px;height:24px}.lockup__word{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.s__me{margin-left:8px;border:0;background:none;padding:0;font:inherit;font-size:12px;font-weight:600;color:var(--k-text-2);text-decoration:underline;cursor:pointer}
 .st{max-width:640px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 40px)}
 .st__top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--k-ink)}
 .st__top h1{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em;margin:22px 0 4px}
@@ -139,14 +145,14 @@ function render(rows) {
     const picks = sessions.filter((s) => s.pick).map((s) => s.pick);
     const visitN = {};
     [...sessions].reverse().forEach((s) => { s.nth = visitN[s.vid] = (visitN[s.vid] || 0) + 1; });
-    html += '<section class="cl"><div class="cl__head"><div><div class="cl__name">' + esc(c.name) + '</div><a class="cl__link" href="' + esc(c.route) + '" target="_blank" rel="noopener">' + esc(location.origin + c.route) + '</a></div></div>';
+    html += '<section class="cl"><div class="cl__head"><div><div class="cl__name">' + esc(c.name) + '</div><a class="cl__link" href="' + esc(c.route) + '?owner" target="_blank" rel="noopener">' + esc(location.origin + c.route) + '</a></div></div>';
     html += '<div class="kpis"><div class="kpi"><b>' + sessions.length + '</b><span>Visits</span></div><div class="kpi"><b>' + people + '</b><span>People</span></div><div class="kpi"><b>' + videos + '</b><span>Played a video</span></div><div class="kpi"><b>' + (picks.length ? esc(picks[0]) : '–') + '</b><span>Choice</span></div></div>';
     html += '<div class="ss">';
     if (!sessions.length) html += '<p class="empty">No visits yet.</p>';
     for (const s of sessions) {
       const where = [s.city, s.country].filter(Boolean).join(', ');
       html += '<div class="s"><div class="s__row"><span class="s__when">' + esc(fmtWhen(s.start)) + '</span><span class="s__dur">' + fmtDur(s.total) + '</span></div>';
-      html += '<div class="s__meta">' + (s.owner ? '<span class="tag tag--ink">You</span>' : '') + (s.nth > 1 ? '<span class="tag">Visit ' + s.nth + '</span>' : '') + (s.lang ? '<span class="tag">' + esc(String(s.lang).toUpperCase()) + '</span>' : '') + esc([s.device, where].filter(Boolean).join(' · ')) + '</div>';
+      html += '<div class="s__meta">' + (s.owner ? '<span class="tag tag--ink">You</span>' : '') + (s.nth > 1 ? '<span class="tag">Visit ' + s.nth + '</span>' : '') + (s.lang ? '<span class="tag">' + esc(String(s.lang).toUpperCase()) + '</span>' : '') + esc([s.device, where].filter(Boolean).join(' · ')) + (!s.owner && s.vid ? '<button class="s__me" data-me="' + esc(s.vid) + '">This was me</button>' : '') + '</div>';
       const max = Math.max(1, ...s.dwell);
       html += '<div class="heat" aria-label="Pages seen">' + c.pages.map((label, i) => {
         const d = s.dwell[i + 1];
@@ -166,11 +172,27 @@ function render(rows) {
   app.innerHTML = html;
   document.getElementById('own').onchange = (e) => { set('kodna-stats-own', e.target.checked ? '1' : null); render(rows); };
   document.getElementById('refresh').onclick = load;
+  for (const b of app.querySelectorAll('[data-me]')) b.onclick = async () => { b.textContent = '…'; await markOwner(b.dataset.me); load(); };
+}
+
+/** Tag every visit from this device id as Kodna's own (also earlier ones). */
+async function markOwner(vid) {
+  try {
+    await fetch('/api/stats', { method: 'POST', headers: { 'x-stats-key': get(KEY), 'content-type': 'application/json' }, body: JSON.stringify({ owner: vid }) });
+  } catch {}
 }
 
 async function load() {
   const key = get(KEY);
   if (!key) return login();
+  // Opening the dashboard means this browser is Kodna's: proposals opened here count as "You",
+  // including any visit made before (e.g. a link tapped from this page without ?owner).
+  set('kodna-owner', '1');
+  const myVid = get('kodna-vid');
+  if (myVid && !sessionStorage.getItem('kodna-owner-synced')) {
+    await markOwner(myVid);
+    try { sessionStorage.setItem('kodna-owner-synced', '1'); } catch {}
+  }
   app.innerHTML = '<p class="empty">Loading…</p>';
   try {
     const r = await fetch('/api/stats', { headers: { 'x-stats-key': key }, cache: 'no-store' });

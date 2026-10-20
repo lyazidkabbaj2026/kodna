@@ -54,5 +54,24 @@ $$;
 revoke all on function public.kodna_stats(text, int) from public;
 grant execute on function public.kodna_stats(text, int) to anon;
 
+-- Tag all visits from one device (visitor id) as Kodna's own, e.g. after opening a link without ?owner.
+create or replace function public.kodna_mark_owner(p_key text, p_vid text)
+returns integer
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare n integer;
+begin
+  if not exists (select 1 from private.settings s where s.key = 'stats_key' and s.value = p_key) then
+    raise exception 'forbidden' using errcode = '42501';
+  end if;
+  update public.proposal_events set owner = true where vid = p_vid and not owner;
+  get diagnostics n = row_count;
+  return n;
+end;
+$$;
+grant execute on function public.kodna_mark_owner(text, text) to anon;
+
 -- The stats key to give the dashboard:
 --   select value from private.settings where key = 'stats_key';

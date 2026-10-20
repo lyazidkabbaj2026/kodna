@@ -70,12 +70,17 @@ async function image(file, widths) {
 
 // Fonts and CSS (inlined into each page: one request for the HTML, nothing render-blocking).
 const fontUrls = {};
-let css = ['tokens.css', 'base.css'].map((f) => fs.readFileSync(path.join(ROOT, 'src/styles', f), 'utf8')).join('\n');
-css = css.replace(/url\('\.\.\/\.\.\/brand\/fonts\/([^']+)'\)/g, (_, f) => {
-  fontUrls[f] ??= emit(fs.readFileSync(path.join(ROOT, 'brand/fonts', f)), 'woff2', 'f');
-  return `url('${fontUrls[f]}')`;
-});
-css = (await esbuild.transform(css, { loader: 'css', minify: true })).code;
+async function bundleCss(files) {
+  let out = files.map((f) => fs.readFileSync(path.join(ROOT, 'src/styles', f), 'utf8')).join('\n');
+  out = out.replace(/url\('\.\.\/\.\.\/brand\/fonts\/([^']+)'\)/g, (_, f) => {
+    fontUrls[f] ??= emit(fs.readFileSync(path.join(ROOT, 'brand/fonts', f)), 'woff2', 'f');
+    return `url('${fontUrls[f]}')`;
+  });
+  return (await esbuild.transform(out, { loader: 'css', minify: true })).code;
+}
+const css = await bundleCss(['tokens.css', 'base.css']);
+// The stats dashboard is a normal scrolling page: brand tokens only, none of the deck's page locks.
+const tokensCss = await bundleCss(['tokens.css']);
 
 const js = (
   await esbuild.build({
@@ -151,7 +156,7 @@ for (const { data, langs: byLang } of clients) {
 
 fs.writeFileSync(path.join(DIST, '404.html'), render404(shared, uiFor('fr')));
 fs.mkdirSync(path.join(DIST, 'stats'), { recursive: true });
-fs.writeFileSync(path.join(DIST, 'stats', 'index.html'), renderStats({ clients: statsClients, css, favicon, markSvg }));
+fs.writeFileSync(path.join(DIST, 'stats', 'index.html'), renderStats({ clients: statsClients, css: tokensCss, favicon, markSvg }));
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 const jsGz = (await import('node:zlib')).gzipSync(js).length;
