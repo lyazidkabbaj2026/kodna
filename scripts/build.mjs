@@ -8,6 +8,7 @@ import * as esbuild from 'esbuild';
 import { loadClients, linkTokens, mediaPath, DataError, ROOT } from './lib/clients.mjs';
 import { renderProposal, render404 } from './lib/render.mjs';
 import { makeOgImage } from './lib/og.mjs';
+import { renderStats } from './lib/stats-page.mjs';
 
 const DIST = path.join(ROOT, 'dist');
 const CACHE = path.join(ROOT, '.cache');
@@ -92,6 +93,7 @@ const favicon = emit(Buffer.from(markSvg.replace('currentColor', '#0a1428')), 's
 const shared = { css, js, markSvg, favicon, preloadFont: fontUrls['inter-latin-wght-normal.woff2'] };
 
 const report = [];
+const statsClients = [];
 for (const { data, langs: byLang } of clients) {
   const slug = data.client.slug;
   const media = (rel) => mediaPath(slug, rel);
@@ -130,10 +132,26 @@ for (const { data, langs: byLang } of clients) {
     fs.mkdirSync(path.join(DIST, langs[i].href), { recursive: true });
     fs.writeFileSync(path.join(DIST, langs[i].href, 'index.html'), html);
   }
+  const en = uiFor('en');
+  statsClients.push({
+    slug,
+    name: data.client.name,
+    route,
+    letters: data.concepts.map((c) => c.letter),
+    pages: [
+      en.coverTitle,
+      en.beforeTitle,
+      ...data.concepts.flatMap((c) => [`${c.letter} · ${en.theIdea}`, `${c.letter} · ${en.preview}`, `${c.letter} · ${en.shotsTitle}`]),
+      en.termsTitle,
+      en.chooseTitle,
+    ],
+  });
   report.push({ slug, route, langs: codes, videos: assets.concepts.map((a) => a.videoBytes), placeholder: !!data.placeholder, confirm: !!data.cta.confirmHandle });
 }
 
 fs.writeFileSync(path.join(DIST, '404.html'), render404(shared, uiFor('fr')));
+fs.mkdirSync(path.join(DIST, 'stats'), { recursive: true });
+fs.writeFileSync(path.join(DIST, 'stats', 'index.html'), renderStats({ clients: statsClients, css, favicon, markSvg }));
 
 const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 const jsGz = (await import('node:zlib')).gzipSync(js).length;

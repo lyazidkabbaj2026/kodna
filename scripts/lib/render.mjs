@@ -64,6 +64,12 @@ const ICON = {
   ig: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></svg>',
 };
 
+/** Last word wrapped in <em> (gradient accent on the cover title). */
+const emLast = (s) => {
+  const i = s.lastIndexOf(' ');
+  return i < 0 ? e(s) : `${e(s.slice(0, i))} <em>${e(s.slice(i + 1))}</em>`;
+};
+
 const brandLockup = (markSvg, cls = '') =>
   `<span class="lockup ${cls}"><span class="lockup__mark">${markSvg}</span><span class="lockup__word">Kodna</span></span>`;
 
@@ -89,8 +95,8 @@ function pageCover({ data, assets, ui, markSvg }) {
     label: ui.coverTitle,
     html: `
     <div class="cover">
-      <div class="brands anim" style="--d:0">${brandLockup(markSvg)}${logoChip(assets, data, ui)}</div>
-      <div class="fan anim" style="--d:1;--n:${shown.length}" aria-hidden="true">
+      <div class="brands rv" style="--d:0">${brandLockup(markSvg)}${logoChip(assets, data, ui)}</div>
+      <div class="fan" aria-hidden="true"><div class="fan__float">
         ${shown
           .map(
             (c, i) => `<div class="fan__card" style="--i:${i - (shown.length - 1) / 2}">
@@ -99,11 +105,11 @@ function pageCover({ data, assets, ui, markSvg }) {
         </div>`,
           )
           .join('')}
-      </div>
+      </div></div>
       <div class="cover__text">
-        <p class="eyebrow anim" style="--d:2">${e(ui.proposal)} · ${e(data.client.name)}</p>
-        <h1 class="cover__title anim" style="--d:3">${e(ui.coverTitle)}</h1>
-        <p class="cover__sub anim" style="--d:4">${e(t(ui.coverConcepts, { n }))}<span class="dot">·</span><span class="nowrap">${e(fmtDate(data.date, ui.locale))}</span></p>
+        <p class="eyebrow rv" style="--d:3">${e(ui.proposal)} · ${e(data.client.name)}</p>
+        <h1 class="cover__title rv" style="--d:4">${emLast(ui.coverTitle)}</h1>
+        <p class="cover__sub rv" style="--d:5">${e(t(ui.coverConcepts, { n }))}<span class="cover__date">${e(fmtDate(data.date, ui.locale))}</span></p>
       </div>
     </div>`,
   };
@@ -115,10 +121,10 @@ function pageBefore({ data, ui }) {
     label: ui.beforeTitle,
     html: `
     <div class="sheet">
-      <p class="eyebrow">${e(ui.beforeTitle)}</p>
-      <p class="statement">${e(data.disclaimer)}</p>
-      <h2 class="h-sub">${e(ui.finalAddsTitle)}</h2>
-      <ul class="adds">
+      <p class="eyebrow rv">${e(ui.beforeTitle)}</p>
+      <p class="statement rv" style="--d:1">${e(data.disclaimer)}</p>
+      <h2 class="h-sub rv" style="--d:2">${e(ui.finalAddsTitle)}</h2>
+      <ul class="adds stagger">
         ${data.finalAdds.map((a) => `<li><span class="tick">${ICON.check}</span><span>${e(a)}</span></li>`).join('')}
       </ul>
     </div>`,
@@ -132,23 +138,23 @@ function pageIdea({ c, a, ui }) {
     label: `${t(ui.concept, { letter: c.letter })} · ${ui.theIdea}`,
     html: `
     <div class="sheet">
-      <div class="idea__head">
+      <div class="idea__head rv">
         <span class="lettertile" aria-hidden="true">${e(c.letter)}</span>
         <div>
           <p class="eyebrow">${e(t(ui.concept, { letter: c.letter }))}</p>
           <h2 class="h-title">${e(c.title)}</h2>
         </div>
       </div>
-      <p class="lead">${e(c.idea)}</p>
+      <p class="lead rv" style="--d:1">${e(c.idea)}</p>
       ${
         c.why?.length
-          ? `<div class="card">
+          ? `<div class="card rv" style="--d:2">
         <h3 class="card__title">${e(ui.why)}</h3>
         <ol class="rows">${c.why.map((w, i) => `<li><span class="num">${i + 1}</span><span>${e(w)}</span></li>`).join('')}</ol>
       </div>`
           : ''
       }
-      <button class="previewcard" type="button" data-go-next>
+      <button class="previewcard rv" style="--d:3" type="button" data-go-next>
         <span class="previewcard__thumb" data-protect>${img({ asset: a.poster, alt: '', sizes: '64px' })}<span class="previewcard__play">${ICON.play}</span></span>
         <span class="previewcard__text"><strong>${e(ui.watchPreview)}</strong><span>${e(meta)}</span></span>
         <span class="previewcard__arrow">${ICON.arrowR}</span>
@@ -165,7 +171,7 @@ function pageVideo({ c, a, ui }) {
     label: `${name} · ${ui.preview}`,
     html: `
     <div class="watch">
-      <p class="watch__label"><span class="badge">${e(c.letter)}</span> ${e(c.title)} <span class="watch__dim">· ${e(ui.preview)}</span></p>
+      <p class="watch__label rv"><span class="badge">${e(c.letter)}</span> ${e(c.title)} <span class="watch__dim">· ${e(ui.preview)}</span></p>
       <div class="player" data-player data-protect>
         <video playsinline webkit-playsinline preload="none" data-src="${e(a.video)}" data-poster="${e(a.poster.src)}"
           controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback
@@ -187,7 +193,7 @@ function pageVideo({ c, a, ui }) {
           </button>
         </div>
       </div>
-      <p class="watch__note">${e(ui.previewNote)}</p>
+      <p class="watch__note rv" style="--d:4">${e(ui.previewNote)}</p>
     </div>`,
   };
 }
@@ -200,14 +206,14 @@ function pageShots({ c, a, ui }) {
     label: `${name} · ${ui.shotsTitle}`,
     html: `
     <div class="sheet sheet--wide sheet--top">
-      <div class="shots__head">
+      <div class="shots__head rv">
         <p class="eyebrow"><span class="badge badge--sm">${e(c.letter)}</span> ${e(c.title)}</p>
         <div class="shots__row">
           <h2 class="h-title">${e(ui.shotsTitle)}</h2>
           <p class="shots__meta">${e(t(ui.shotsCount, { n: c.shots.length }))}<span class="shots__hint">${e(ui.shotsHint)} <span class="nudge">${ICON.arrowR}</span></span></p>
         </div>
       </div>
-      <ol class="strip" data-noswipe data-protect tabindex="0" aria-label="${e(`${name} · ${ui.shotsTitle}`)}">
+      <ol class="strip stagger" data-noswipe data-protect tabindex="0" aria-label="${e(`${name} · ${ui.shotsTitle}`)}">
         ${c.shots
           .map((s, i) => {
             const tc = [fmtTime(s.start), fmtTime(s.end)].filter(Boolean).join(' – ');
@@ -223,6 +229,7 @@ function pageShots({ c, a, ui }) {
           })
           .join('')}
       </ol>
+      <div class="dots rv" style="--d:3" aria-hidden="true">${c.shots.map((_, i) => `<i${i ? '' : ' class="is-on"'}></i>`).join('')}</div>
     </div>`,
   };
 }
@@ -245,24 +252,24 @@ function pageTerms({ data, assets, ui }) {
     label: ui.termsTitle,
     html: `
     <div class="sheet">
-      <p class="eyebrow">${e(ui.termsTitle)}</p>
-      <div class="price">
-        <p class="price__total">${e(money(tm.price))}</p>
+      <p class="eyebrow rv">${e(ui.termsTitle)}</p>
+      <div class="price rv" style="--d:1">
+        <p class="price__total" data-countup="${tm.price}" data-locale="${ui.locale}" data-suffix="${e(`\u00a0${cur}`)}">${e(money(tm.price))}</p>
         <div class="price__split">
           <p><strong>${e(money(tm.deposit))}</strong><span>${e(ui.atOrder)}</span></p>
           <p><strong>${e(money(tm.onDelivery))}</strong><span>${e(ui.atDelivery)}</span></p>
         </div>
       </div>
-      <div class="card">
+      <div class="card rv" style="--d:2">
         <h3 class="card__title">${e(ui.included)}</h3>
-        <ul class="rows">
+        <ul class="rows stagger">
           ${rows.map((r) => `<li><span class="tick">${ICON.check}</span><span>${e(r)}</span></li>`).join('')}
         </ul>
         ${tm.extraLanguage ? `<p class="extra"><span>${e(t(ui.extraLanguage, { language: tm.extraLanguage.language }))}</span><strong>+${e(money(tm.extraLanguage.price))}</strong></p>` : ''}
       </div>
       ${
         gift
-          ? `<div class="gift" data-protect>
+          ? `<div class="gift rv" style="--d:4" data-protect>
         ${giftImg ? `<div class="gift__img">${img({ asset: giftImg, alt: t(ui.logoAlt, { name: data.client.name }), sizes: '96px' })}</div>` : ''}
         <div>
           <p class="gift__badge">${e(ui.giftBadge)}</p>
@@ -282,35 +289,36 @@ function pageChoose({ data, assets, ui, markSvg }) {
     label: ui.chooseTitle,
     html: `
     <div class="choose">
-      <p class="eyebrow">${e(ui.chooseTitle)}</p>
-      <h2 class="choose__title">${e(ui.chooseLead)}</h2>
-      <div class="choose__buttons">
+      <p class="eyebrow rv">${e(ui.chooseTitle)}</p>
+      <h2 class="choose__title rv" style="--d:1">${e(ui.chooseLead)}</h2>
+      <div class="choose__buttons stagger">
         ${data.concepts
           .map(
             (c, i) => `<a class="pick" href="${e(data.cta.instagramDm)}" data-pick="${e(c.letter)}" rel="noopener">
           <span class="pick__thumb" data-protect>${img({ asset: assets.concepts[i].poster, alt: '', sizes: '64px' })}<span class="pick__letter">${e(c.letter)}</span></span>
           <span class="pick__text"><span class="pick__main">${e(t(ui.choose, { letter: c.letter }))}</span><span class="pick__sub">${e(c.title)}</span></span>
-          <span class="pick__ig">${ICON.ig}</span>
+          <span class="pick__ig"><span class="i-ig">${ICON.ig}</span><span class="i-ok">${ICON.check}</span></span>
         </a>`,
           )
           .join('')}
       </div>
-      <p class="choose__hint">${e(ui.chooseHint)}</p>
-      ${data.cta.text ? `<p class="choose__text">${e(data.cta.text)}</p>` : ''}
-      <div class="choose__sign">${brandLockup(markSvg, 'lockup--sm')}<p class="tagline">Build<i>•</i>Automate<i>•</i>Grow</p></div>
+      <p class="choose__hint rv" style="--d:4">${e(ui.chooseHint)}</p>
+      ${data.cta.text ? `<p class="choose__text rv" style="--d:5">${e(data.cta.text)}</p>` : ''}
+      <div class="choose__sign rv" style="--d:6">${brandLockup(markSvg, 'lockup--sm')}<p class="tagline">Build<i>•</i>Automate<i>•</i>Grow</p></div>
     </div>`,
   };
 }
 
 /** First screen of the base-language page: pick FR / EN. Bilingual on purpose. */
 function langPicker({ data, assets, langs, markSvg, uis }) {
-  return `<div class="langpick" data-langpick role="dialog" aria-modal="true" aria-labelledby="lp-title">
+  return `<div class="langpick" data-langpick role="dialog" aria-modal="true" aria-labelledby="lp-title" style="${accents(data.client.colors)}">
+  <div class="langpick__bg" aria-hidden="true"><div class="aura"></div></div>
   <div class="langpick__inner">
-    <div class="brands">${brandLockup(markSvg)}${logoChip(assets, data, uis[0])}</div>
+    <div class="brands rv">${brandLockup(markSvg)}${logoChip(assets, data, uis[0])}</div>
     <div class="langpick__main">
-      <p class="eyebrow">${e(data.client.name)}</p>
-      <h1 class="langpick__title" id="lp-title">${uis.map((u, i) => (i ? `<span>${e(u.langPrompt)}</span>` : e(u.langPrompt))).join('')}</h1>
-      <div class="langpick__options">
+      <p class="eyebrow rv" style="--d:2">${e(data.client.name)}</p>
+      <h1 class="langpick__title rv" style="--d:3" id="lp-title">${uis.map((u, i) => (i ? `<span>${e(u.langPrompt)}</span>` : e(u.langPrompt))).join('')}</h1>
+      <div class="langpick__options rv" style="--d:5">
         ${langs
           .map(
             (l) => `<a class="langopt" href="${e(l.href)}" data-setlang="${l.code}" lang="${l.code}">
@@ -320,16 +328,16 @@ function langPicker({ data, assets, langs, markSvg, uis }) {
           .join('')}
       </div>
     </div>
-    <p class="tagline">Build<i>•</i>Automate<i>•</i>Grow</p>
+    <p class="tagline rv" style="--d:7">Build<i>•</i>Automate<i>•</i>Grow</p>
   </div>
 </div>`;
 }
 
 // ---- document --------------------------------------------------------------
 
-function head({ title, description, shared, ui, og, url, boot = '' }) {
+function head({ title, description, shared, ui, og, url, boot = '', attrs = '' }) {
   return `<!doctype html>
-<html lang="${ui.htmlLang}">
+<html lang="${ui.htmlLang}"${attrs}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -396,7 +404,8 @@ export function renderProposal({ data, assets, shared, ui, lang, langs, uis, og,
   const title = `${ui.coverTitle} · ${data.client.name} × Kodna`;
   const description = `${t(ui.coverConcepts, { n: data.concepts.length })}. ${data.disclaimer}`;
 
-  return `${head({ title, description, shared, ui, og, url, boot: langs.length > 1 ? bootScript({ lang, langs, picker }) : '<script>document.documentElement.classList.add("lang-set")</script>' })}
+  const attrs = ` data-slug="${e(data.client.slug)}" data-beacon="/api/t"`;
+  return `${head({ title, description, shared, ui, og, url, attrs, boot: langs.length > 1 ? bootScript({ lang, langs, picker }) : '<script>document.documentElement.classList.add("lang-set")</script>' })}
 <body>
 <div class="deck" style="${accents(data.client.colors)}" data-tone="${pages[0].tone}" data-page="1">
   <header class="chrome">
@@ -413,7 +422,7 @@ export function renderProposal({ data, assets, shared, ui, lang, langs, uis, og,
     ${pages
       .map(
         (p, i) => `<section class="page page--${p.tone}${p.cls ? ` ${p.cls}` : ''}" data-tone="${p.tone}" data-dock="${e(nextLabel(i))}" aria-roledescription="page" aria-label="${e(`${t(ui.pageOf, { i: i + 1, n })} : ${p.label}`)}"${i ? ' inert' : ''}>
-      <div class="page__scroll">${p.html}</div>${p.edges ? '<div class="edge edge--l" aria-hidden="true"></div><div class="edge edge--r" aria-hidden="true"></div>' : ''}
+      ${p.tone === 'dark' ? '<div class="aura" aria-hidden="true"></div>' : ''}<div class="page__scroll">${p.html}</div>${p.edges ? '<div class="edge edge--l" aria-hidden="true"></div><div class="edge edge--r" aria-hidden="true"></div>' : ''}
     </section>`,
       )
       .join('\n    ')}

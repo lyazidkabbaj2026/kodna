@@ -41,6 +41,7 @@ try {
       await page.goto(route, { waitUntil: 'networkidle' });
       await page.evaluate(() => document.fonts.ready);
       if (lang) {
+        await page.waitForTimeout(1200);
         await page.screenshot({ path: path.join(dir, '00-language.png') });
         await Promise.all([page.waitForLoadState('networkidle'), page.click(`.langopt[data-setlang="${lang}"]`)]);
         await page.waitForSelector('html.lang-set');
@@ -49,7 +50,7 @@ try {
       const n = await page.locator('.page').count();
       for (let i = 0; i < n; i++) {
         if (i) await page.keyboard.press('ArrowRight');
-        await page.waitForTimeout(i ? 650 : 1300);
+        await page.waitForTimeout(i ? 1400 : 2000);
         await page.waitForLoadState('networkidle');
         await page.screenshot({ path: path.join(dir, `${String(i + 1).padStart(2, '0')}.png`) });
       }

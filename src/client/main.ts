@@ -1,5 +1,6 @@
 // Proposal deck: swipe pager, lazy media, custom video player, "Je choisis" buttons.
 // No framework. Everything is wired from data-* attributes rendered by scripts/lib/render.mjs.
+import { track as log } from './track';
 
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector(sel) as T | null;
 const $$ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => Array.from(root.querySelectorAll(sel)) as T[];
@@ -58,7 +59,13 @@ function go(i: number, animate = true) {
   pages.forEach((p, j) => {
     if (j === i) p.removeAttribute('inert');
     else p.setAttribute('inert', '');
+    // .is-current (re)starts the page's entrance animations in CSS.
+    p.classList.toggle('is-current', j === i);
   });
+  if (changed || !animate) {
+    for (const el of $$('[data-countup]', pages[i])) countUp(el);
+    onPageView(i);
+  }
   segs.forEach((s, j) => {
     s.classList.toggle('is-done', j < i);
     s.classList.toggle('is-current', j === i);
@@ -78,6 +85,27 @@ function go(i: number, animate = true) {
   } catch {
     /* some in-app browsers forbid it; position is just not remembered */
   }
+}
+
+function onPageView(i: number) {
+  log('view', { page: i + 1, label: (pages[i].getAttribute('aria-label') || '').split(' : ').slice(1).join(' : ') });
+}
+
+/** Price ticks up to its value when the terms page comes into view. */
+function countUp(el: HTMLElement) {
+  const to = Number(el.dataset.countup);
+  const fmt = new Intl.NumberFormat(el.dataset.locale || undefined);
+  const suffix = el.dataset.suffix || '';
+  if (reduceMotion || !to) return;
+  const start = performance.now();
+  const dur = 900;
+  const step = (now: number) => {
+    const k = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = fmt.format(Math.round(to * eased)) + suffix;
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
 }
 
 prevBtn.addEventListener('click', () => go(current - 1));
@@ -212,9 +240,12 @@ for (const player of $$('[data-player]')) {
     pp.setAttribute('aria-label', (playing ? pp.dataset.lPause : pp.dataset.lPlay) || '');
     mute.setAttribute('aria-label', (video.muted ? mute.dataset.lUnmute : mute.dataset.lMute) || '');
   };
+  const letter = player.closest('.page')?.querySelector('.badge')?.textContent || '';
+  const reached = new Set<number>();
   video.addEventListener('play', () => {
     player.classList.add('has-started');
     sync();
+    log('play', { letter, value: Math.round(video.currentTime) });
   });
   video.addEventListener('pause', sync);
   video.addEventListener('volumechange', sync);
@@ -224,6 +255,12 @@ for (const player of $$('[data-player]')) {
   });
   video.addEventListener('timeupdate', () => {
     const r = video.duration ? video.currentTime / video.duration : 0;
+    for (const m of [25, 50, 75, 95]) {
+      if (r * 100 >= m && !reached.has(m)) {
+        reached.add(m);
+        log('watched', { letter, value: m === 95 ? 100 : m });
+      }
+    }
     fill.style.transform = `scaleX(${r})`;
     seek.setAttribute('aria-valuenow', String(Math.round(r * 100)));
     seek.setAttribute('aria-valuetext', `${fmt(video.currentTime)} / ${fmt(video.duration)}`);
@@ -253,6 +290,26 @@ for (const player of $$('[data-player]')) {
     else return;
     ev.preventDefault();
   });
+}
+
+// ---------------------------------------------------------------- shots strip position
+
+for (const strip of $$('.strip')) {
+  const dots = $$('i', strip.parentElement!.querySelector('.dots') || document.createElement('div'));
+  let raf = 0;
+  strip.addEventListener(
+    'scroll',
+    () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const first = strip.firstElementChild as HTMLElement | null;
+        const step = first ? first.offsetWidth + 14 : strip.clientWidth;
+        const at = Math.round(strip.scrollLeft / step);
+        dots.forEach((d, k) => d.classList.toggle('is-on', k === Math.min(at, dots.length - 1)));
+      });
+    },
+    { passive: true },
+  );
 }
 
 // ---------------------------------------------------------------- choose
@@ -299,6 +356,8 @@ for (const a of $$<HTMLAnchorElement>('[data-pick]')) {
     ev.preventDefault();
     const letter = a.dataset.pick || '';
     const href = a.href;
+    $$('[data-pick]').forEach((b) => b.classList.toggle('is-picked', b === a));
+    log('pick', { letter });
     copy(letter).then((ok) => {
       const tpl = (ok ? toastEl.dataset.copied : toastEl.dataset.open) || '';
       toast(tpl.replace('{letter}', letter));
@@ -316,6 +375,7 @@ for (const a of $$<HTMLAnchorElement>('[data-pick]')) {
 for (const a of $$<HTMLAnchorElement>('[data-setlang]')) {
   a.addEventListener('click', (ev) => {
     const lang = a.dataset.setlang || '';
+    log('lang', { label: lang });
     try {
       localStorage.setItem('kodna-lang', lang);
     } catch {
@@ -323,8 +383,8 @@ for (const a of $$<HTMLAnchorElement>('[data-setlang]')) {
     }
     if (lang === root.lang) {
       ev.preventDefault();
-      root.classList.add('lang-set');
-      nextBtn.focus({ preventScroll: true });
+      root.classList.add('lang-set', 'lang-chosen');
+      go(current, false); // restart the cover's entrance now that it is visible
     }
   });
 }

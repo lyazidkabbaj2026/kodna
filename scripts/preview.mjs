@@ -1,4 +1,5 @@
-// Serves dist/ like Vercel does (clean URLs, 404.html, X-Robots-Tag, byte ranges for video).
+// Serves dist/ like Vercel does (clean URLs, 404.html, X-Robots-Tag, byte ranges for video),
+// and runs api/*.js the way Vercel functions are called (set SUPABASE_URL / SUPABASE_KEY to try tracking).
 // Usage: npm run preview [-- --port 4321]
 import http from 'node:http';
 import fs from 'node:fs';
@@ -10,8 +11,16 @@ const port = Number(process.argv[process.argv.indexOf('--port') + 1]) || 4321;
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.mp4': 'video/mp4', '.woff2': 'font/woff2' };
 
 http
-  .createServer((req, res) => {
+  .createServer(async (req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+    const api = url.match(/^\/api\/([a-z]+)$/);
+    if (api && fs.existsSync(path.join(ROOT, 'api', `${api[1]}.js`))) {
+      // Minimal Vercel-style helpers.
+      res.status = (code) => ((res.statusCode = code), res);
+      res.json = (obj) => (res.setHeader('content-type', 'application/json'), res.end(JSON.stringify(obj)));
+      const mod = await import(path.join(ROOT, 'api', `${api[1]}.js`));
+      return mod.default(req, res);
+    }
     let file = path.join(DIST, url);
     if (!file.startsWith(DIST)) return res.writeHead(400).end();
     if (fs.existsSync(path.join(file, 'index.html')) && url !== '/') file = path.join(file, 'index.html');
